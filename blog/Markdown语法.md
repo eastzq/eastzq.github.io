@@ -121,6 +121,8 @@ Markdown 语法：
 
 ![GitHub set up](https://assets-cdn.github.com/images/modules/logos_page/Octocat.png)
 
+![GitHub set up](Octocat.png)
+
 ## 链接
 
 Markdown 语法：
