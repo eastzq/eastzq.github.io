@@ -117,9 +117,7 @@ Markdown 语法：
 
 效果如下：
 
-![GitHub set up](https://assets-cdn.github.com/images/modules/logos_page/Octocat.png)
-
-![GitHub set up](Octocat.png)
+![windows](2019-03-15-09-20-13.png)
 
 ## 链接
 
