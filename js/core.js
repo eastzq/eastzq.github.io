@@ -1,6 +1,6 @@
 var issuesList;
 var issuesHTML;
-var Api = +function(){
+var Api = function(){
     var M = function(){};
     M.init = function(){
         var webURL = window.location.href;
@@ -63,7 +63,7 @@ var Api = +function(){
         return (ext==="md" || ext ==="markdown");
     }   
     return M;
-}();
+}(window);
 $(document).ready(function() {
     var main = Api.init();
     console.log(main);
