@@ -10,13 +10,13 @@ var Api = function(){
         }
         var gh = {};
         gh.user = webURL.split(splitFlag)[1].split(".")[0];
-        gh.blogListURL = 'https://api.github.com/repos/' + gh.user + '/' + gh.user + '.github.io/contents/blog';
-        gh.issuesList = 'https://api.github.com/repos/' + gh.user + '/' + gh.user + '.github.io/issues';
-        gh.issuesHTML = 'https://github.com/' + gh.user + '/' + gh.user + '.github.io/issues'
-        gh.readmeURL = 'https://raw.githubusercontent.com/' + gh.user + '/' + gh.user + '.github.io/master/About Me.md';
+        gh.baseBlogUrl = 'https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog';
+        gh.issuesList = 'https://api.github.com/repos/eastzq/eastzq.github.io/issues';
+        gh.issuesHTML = 'https://github.com/eastzq/eastzq.github.io/issues'
+        gh.readmeURL = 'https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md';
         var api = new Api();
         api.gh = gh;
-        api.blogTree= Api.genBlogTree(gh.blogListURL);
+        api.blogTree= Api.genBlogTree(gh.baseBlogUrl);
         return api;
     }    
 
@@ -47,7 +47,7 @@ var Api = function(){
                         node.origin = obj;
                         node.text=obj.name;
                         node.type=fileType;
-                        node.nodes = M.genBlogTree();
+                        node.nodes = M.genBlogTree(obj.url);
                         blogTree.push(node);
                     }
                 }
