@@ -30,8 +30,7 @@ var Api = function(){
             success: function(json) {
                 for (var i = 0; i < json.length; i++) {
                     var node =  {
-                        text: "",
-                        nodes: []
+                        text: ""
                     }                
                     var obj = json[i];
                     console.log(obj);
