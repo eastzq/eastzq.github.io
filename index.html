@@ -11,14 +11,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="tinyblog" content="v1.2">
 	<title>this is title</title>
-
-	<link href="//cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//cdn.bootcss.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="./css/mystyle.css" rel="stylesheet">
-
+	<!-- jquery -->
 	<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<!-- bootstrap -->
+	<link href="//cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 	<script src="//cdn.bootcss.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<!-- bootstrap treeview -->
+	<link href="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+	<!-- font-awsome -->
+	<link href="//cdn.bootcss.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
+	
 	<!--markdown-->
 	<link rel="stylesheet" href="./editor.md/css/editormd.preview.min.css" />
 	<script src="./editor.md/lib/marked.min.js"></script>
@@ -29,8 +33,9 @@
 	<script src="./editor.md/lib/flowchart.min.js"></script>
 	<script src="./editor.md/lib/jquery.flowchart.min.js"></script>
 	<script src="./editor.md/editormd.min.js"></script>
-	<!--markdown-->
-
+	
+	<!-- myscript -->
+	<link href="./css/mystyle.css" rel="stylesheet">
 	<script src="./js/core.js"></script>
 
 </head>
@@ -64,7 +69,7 @@
 		<div class="row">
 
 			<div class="col-sm-3 col-md-2 sidebar ">
-
+				<div id="tree"></div>
 				<ul class="nav nav-sidebar" id="nav">
 
 					<!--文章列表-->
