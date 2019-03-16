@@ -47,7 +47,7 @@ var Api = function(){
                         node.origin = obj;
                         node.text=obj.name;
                         node.type=fileType;
-                        node.nodes = genBlogTree();
+                        node.nodes = M.genBlogTree();
                         blogTree.push(node);
                     }
                 }
