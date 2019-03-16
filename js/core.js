@@ -10,10 +10,10 @@ var Api = function(){
         }
         var gh = {};
         gh.user = webURL.split(splitFlag)[1].split(".")[0];
-        gh.blogListURL = 'https://api.github.com/repos/' + user + '/' + user + '.github.io/contents/blog';
-        gh.issuesList = 'https://api.github.com/repos/' + user + '/' + user + '.github.io/issues';
-        gh.issuesHTML = 'https://github.com/' + user + '/' + user + '.github.io/issues'
-        gh.readmeURL = 'https://raw.githubusercontent.com/' + user + '/' + user + '.github.io/master/About Me.md';
+        gh.blogListURL = 'https://api.github.com/repos/' + gh.user + '/' + gh.user + '.github.io/contents/blog';
+        gh.issuesList = 'https://api.github.com/repos/' + gh.user + '/' + gh.user + '.github.io/issues';
+        gh.issuesHTML = 'https://github.com/' + gh.user + '/' + gh.user + '.github.io/issues'
+        gh.readmeURL = 'https://raw.githubusercontent.com/' + gh.user + '/' + gh.user + '.github.io/master/About Me.md';
         var api = new Api();
         api.gh = gh;
         api.blogTree= Api.genBlogTree(gh.blogListURL);
