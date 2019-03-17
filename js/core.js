@@ -8,7 +8,8 @@ var gh = {
     readmeURL:
         "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md",
     treeUrl:
-        "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/master?recursive=1"
+        "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/master?recursive=1",
+    cache:{}
 };
 
 var Api = (function() {
@@ -170,19 +171,7 @@ var Api = (function() {
         $("#title").text(blogName);
         $("#article").html("loading . . .");
 
-        // set blog content
-        $.get(blogUrl, function(result) {
-            $("#article").html("");
-            //替换markdown里的图片的路径
-            var patten = /\[([^\]])*?\.(jpg|gif|png)\]/gi;
-            var md = result.replace(patten, function(match) {
-                var picPath = match.substring(1, match.lastIndexOf("]"));
-                if (picPath.startsWith("http") || picPath.startsWith("/")) {
-                    return false;
-                }
-                var r = "[" + blogPath + picPath + "]";
-                return r;
-            });
+        var renderMd=  function(md){
             editormd.markdownToHTML("article", {
                 markdown: md, //+ "\r\n" + $("#append-test").text(),
                 // htmlDecode: true, // 开启 HTML 标签解析，为了安全性，默认不开启
@@ -199,7 +188,28 @@ var Api = (function() {
                 flowChart: true, // 默认不解析
                 sequenceDiagram: true // 默认不解析
             });
-        });
+        }
+        
+        if(gh.cache.blogUrl){
+            gh.renderMd(gh.cache.blogUrl);
+        }else{
+            // set blog content
+            $.get(blogUrl, function(result) {
+                $("#article").html("");
+                //替换markdown里的图片的路径
+                var patten = /\[([^\]])*?\.(jpg|gif|png)\]/gi;
+                var md = result.replace(patten, function(match) {
+                    var picPath = match.substring(1, match.lastIndexOf("]"));
+                    if (picPath.startsWith("http") || picPath.startsWith("/")) {
+                        return false;
+                    }
+                    var r = "[" + blogPath + picPath + "]";
+                    return r;
+                });
+                renderMd(md);
+            });
+        }
+
         //get comments_url
         // setCommentURL(issuesList, blogName);
     };
