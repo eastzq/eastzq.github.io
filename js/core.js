@@ -197,9 +197,9 @@ var Api = (function() {
             $.get(blogUrl, function(result) {
                 $("#article").html("");
                 //替换markdown里的图片的路径
-                var patten = /\[([^\]])*?\.(jpg|gif|png)\]/gi;
+                var patten = /\(([^\)])*?\.(jpg|gif|png)\)/gi;
                 var md = result.replace(patten, function(match) {
-                    var picPath = match.substring(1, match.lastIndexOf("]"));
+                    var picPath = match.substring(1, match.lastIndexOf(")"));
                     if (picPath.startsWith("http") || picPath.startsWith("/")) {
                         return false;
                     }
