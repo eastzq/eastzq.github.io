@@ -83,7 +83,7 @@ var Api = (function() {
                     var node = {
                         name: ""
                     };
-                    var obj = json[i];
+                    var obj = json.tree[i];
                     var path = obj.path;
                     var arr = path.split("/");
                     if (arr[0] !== "blog") {
