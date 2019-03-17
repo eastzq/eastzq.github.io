@@ -21,9 +21,6 @@ var Api = (function() {
                 issuesHTML +
                 '">Github issues</a>下添加 Comment'
         );
-        gh.blogTree = Api.genBlogTree2(gh.treeUrl);
-        // api.blogTree = ghJson.blogTree;
-        Api.renderBlogTree("#blogTree", gh.blogTree);
         Api.renderAboutMe();
     };
 
@@ -123,10 +120,12 @@ var Api = (function() {
                         }
                         pArr.push(node);
                     }
+                    gh.blogTree = blogTree;
+                    // api.blogTree = ghJson.blogTree;
+                    M.renderBlogTree("#blogTree", gh.blogTree);
                 }
             }
         });
-        return blogTree;
     };
 
     M.isMarkdown = function(fileName) {
