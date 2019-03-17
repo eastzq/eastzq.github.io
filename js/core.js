@@ -203,7 +203,7 @@ var Api = (function() {
                     if (picPath.startsWith("http") || picPath.startsWith("/")) {
                         return false;
                     }
-                    var r = "[" + blogPath + picPath + "]";
+                    var r = "(" + blogPath + picPath + ")";
                     return r;
                 });
                 renderMd(md);
