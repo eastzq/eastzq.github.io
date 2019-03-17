@@ -87,7 +87,7 @@ var Api = (function() {
                     var path = obj.path;
                     var arr = path.split("/");
                     if (arr[0] !== "blog") {
-                        return;
+                        continue;
                     }
                     var fileName = arr[arr.length - 1];
                     var fileType;
