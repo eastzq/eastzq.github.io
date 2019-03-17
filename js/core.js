@@ -36,7 +36,9 @@ var Api = (function() {
             success: function(json) {
                 for (var i = 0; i < json.length; i++) {
                     var node = {
-                        name: ""
+                        name: "",
+                        iconClose:"fa fa-folder",
+                        iconOpen:"fa fa-folder-open"
                     };
                     var obj = json[i];
                     console.log(obj);
@@ -46,7 +48,7 @@ var Api = (function() {
                         node.origin = obj;
                         node.name = obj.name;
                         node.type = fileType;
-                        node.url = obj.download_url;
+                        node.blogUrl = obj.download_url;
                         blogTree.push(node);
                     } else if (fileType === "dir") {
                         node.origin = obj;
@@ -73,7 +75,7 @@ var Api = (function() {
         $.fn.zTree.init($(blogTreeSelector), settings, data);
     }
     return M;
-})(window);
+})();
 $(document).ready(function() {
     var main = Api.init();
     console.log(main);
