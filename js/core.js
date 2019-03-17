@@ -120,10 +120,10 @@ var Api = (function() {
                         }
                         pArr.push(node);
                     }
-                    gh.blogTree = blogTree;
-                    // api.blogTree = ghJson.blogTree;
-                    M.renderBlogTree("#blogTree", gh.blogTree);
                 }
+                gh.blogTree = blogTree;
+                // api.blogTree = ghJson.blogTree;
+                M.renderBlogTree("#blogTree", gh.blogTree);
             }
         });
     };
