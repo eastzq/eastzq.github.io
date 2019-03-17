@@ -36,7 +36,7 @@ var Api = (function() {
             url: contentUrl,
             async: false,
             success: function(json) {
-                for (var i = 0; i < json.length; i++) {
+                for (var i = 0; i < json.tree.length; i++) {
                     var node = {
                         name: ""
                     };
