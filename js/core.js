@@ -1,8 +1,8 @@
 var issuesList;
 var issuesHTML;
-var Api = function(){
-    var M = function(){};
-    M.init = function(){
+var Api = (function() {
+    var M = function() {};
+    M.init = function() {
         var webURL = window.location.href;
         var splitFlag = "http://";
         if (webURL.substring(0, 5) == "https") {
@@ -10,15 +10,21 @@ var Api = function(){
         }
         var gh = {};
         gh.user = webURL.split(splitFlag)[1].split(".")[0];
-        gh.baseBlogUrl = 'https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog';
-        gh.issuesList = 'https://api.github.com/repos/eastzq/eastzq.github.io/issues';
-        gh.issuesHTML = 'https://github.com/eastzq/eastzq.github.io/issues'
-        gh.readmeURL = 'https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md';
+        gh.baseBlogUrl =
+            "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog";
+        gh.issuesList =
+            "https://api.github.com/repos/eastzq/eastzq.github.io/issues";
+        gh.issuesHTML = "https://github.com/eastzq/eastzq.github.io/issues";
+        gh.readmeURL =
+            "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md";
         var api = new Api();
         api.gh = gh;
-        api.blogTree= Api.genBlogTree(gh.baseBlogUrl);
+        api.blogTreeSelector = '#blogTree';
+        // api.blogTree = Api.genBlogTree(gh.baseBlogUrl);
+        api.blogTree = ghJson.blogTree;
+        Api.renderBlogTree(api.blogTreeSelector,api.blogTree);
         return api;
-    }    
+    };
 
     //递归生成博客树 效率低，但是目前文件较少，以后可以改成懒加载。
     M.genBlogTree = function(contentUrl) {
@@ -26,49 +32,54 @@ var Api = function(){
         $.ajax({
             dataType: "json",
             url: contentUrl,
-            async: false, 
+            async: false,
             success: function(json) {
                 for (var i = 0; i < json.length; i++) {
-                    var node =  {
-                        text: ""
-                    }                
+                    var node = {
+                        name: ""
+                    };
                     var obj = json[i];
                     console.log(obj);
-                    var fileName = obj.name; 
+                    var fileName = obj.name;
                     var fileType = obj.type;
-                    if(fileType==='file' && Api.isMarkdown(fileName)){
+                    if (fileType === "file" && Api.isMarkdown(fileName)) {
                         node.origin = obj;
-                        node.text=obj.name;
-                        node.type= fileType;
-                        node.url=obj.download_url;
+                        node.name = obj.name;
+                        node.type = fileType;
+                        node.url = obj.download_url;
                         blogTree.push(node);
-                    }else if(fileType==='dir'){
+                    } else if (fileType === "dir") {
                         node.origin = obj;
-                        node.text=obj.name;
-                        node.type=fileType;
-                        node.nodes = M.genBlogTree(obj.url);
+                        node.name = obj.name;
+                        node.type = fileType;
+                        node.children = M.genBlogTree(obj.url);
                         blogTree.push(node);
                     }
                 }
             }
         });
         return blogTree;
-    }
-    M.isMarkdown =function(fileName){
-        var index= fileName.lastIndexOf(".");
+    };
+    M.isMarkdown = function(fileName) {
+        var index = fileName.lastIndexOf(".");
         //获取后缀
-        var ext = fileName.substr(index+1).toLowerCase();
+        var ext = fileName.substr(index + 1).toLowerCase();
         //输出结果
-        return (ext==="md" || ext ==="markdown");
-    }   
+        return ext === "md" || ext === "markdown";
+    };
+
+    M.renderBlogTree = function(blogTreeSelector,data){
+        var settings = {};
+        $.fn.zTree.init($(blogTreeSelector), settings, data);
+    }
     return M;
-}(window);
+})(window);
 $(document).ready(function() {
     var main = Api.init();
     console.log(main);
 });
 
-// 
+//
 //     var webURL = window.location.href;
 //     var splitFlag = "http://";
 //     if (webURL.substring(0, 5) == "https") {
@@ -81,13 +92,12 @@ $(document).ready(function() {
 //     issuesHTML = 'https://github.com/' + user + '/' + user + '.github.io/issues'
 //     readmeURL = 'https://raw.githubusercontent.com/' + user + '/' + user + '.github.io/master/About Me.md';
 
-
 //     $("#header").text(user + "'s Blog");
 //     $("#commentsList").removeAttr('data_comments_url');
 //     $("#tips").html("我们不会获取您的用户名和密码,评论直接通过 HTTPS 与 Github API交互,<br>如果您开启了两步验证,请在博客的<a  target=\"_blank\" href=\"" + issuesHTML + "\">Github issues</a>下添加 Comment");
 
 //     var titleString = getTitleString();
-//         //set readme 
+//         //set readme
 //     $.get(readmeURL, function(result) {
 //         $("#title").show();
 //         $("#article").html("");
@@ -111,14 +121,10 @@ $(document).ready(function() {
 //     });
 // });
 
-
-
-
 function setBlogTxt(obj) {
-
     // 隐藏Button
-    if (!$('#btnNav').is(':hidden')) {
-        $('#btnNav').click();
+    if (!$("#btnNav").is(":hidden")) {
+        $("#btnNav").click();
     }
 
     obj = $(obj);
@@ -128,11 +134,10 @@ function setBlogTxt(obj) {
     $("#title").text(blogName);
     $("#article").html("loading . . .");
 
-    // set blog content     
+    // set blog content
     $.get(blogURL, function(result) {
         $("#title").show();
         if (type == "markdown") {
-
             $("#article").html("");
 
             testEditormdView = editormd.markdownToHTML("article", {
@@ -149,59 +154,50 @@ function setBlogTxt(obj) {
                 taskList: true,
                 tex: true, // 默认不解析
                 flowChart: true, // 默认不解析
-                sequenceDiagram: true, // 默认不解析
+                sequenceDiagram: true // 默认不解析
             });
-
         } else {
             $("#title").hide();
             $("#article").html(result);
         }
-
     });
-
-
-
 
     //get comments_url
     setCommentURL(issuesList, blogName);
-
-
 }
 
 function setCommentURL(issuesList, blogName) {
     $("#comments").show();
     console.log("获取并设置评论区");
 
-
     $.ajax({
         type: "GET",
         url: issuesList,
-        dataType: 'json',
+        dataType: "json",
         async: false,
         success: function(json) {
             for (var i = 0; i < json.length; i++) {
                 var title = json[i].title; // Blog title
                 var comments_url = json[i].comments_url;
                 if (title == blogName) {
-                    console.log("该文章存在评论")
-                    $('#commentsList').attr("data_comments_url", comments_url);
+                    console.log("该文章存在评论");
+                    $("#commentsList").attr("data_comments_url", comments_url);
                     setComment(comments_url);
                     break;
                 }
-                $("#commentsList").children().remove();
-                $("#commentsList").removeAttr('data_comments_url');
-
+                $("#commentsList")
+                    .children()
+                    .remove();
+                $("#commentsList").removeAttr("data_comments_url");
             }
         }
     });
-
-
 }
 
-
-
 function setComment(commentURL) {
-    $('#commentsList').children().remove();
+    $("#commentsList")
+        .children()
+        .remove();
 
     $.getJSON(commentURL, function(json) {
         for (var i = 0; i < json.length; i++) {
@@ -213,63 +209,63 @@ function setComment(commentURL) {
 
             // add blog list elements
             var commentHtml =
-                "<li class=\"comment\">" +
-                "<a class=\"pull-left\" href=\"#\"><img class=\"avatar\" src=\"" + avatar_url +
-                "\" alt=\"avatar\"></a><div class=\"comment-body\"><div class=\"comment-heading\"><h4 class=\"user\">" + user +
-                "</h4><h5 class=\"time\">" + updated_at +
-                "</h5></div><p>" + body +
+                '<li class="comment">' +
+                '<a class="pull-left" href="#"><img class="avatar" src="' +
+                avatar_url +
+                '" alt="avatar"></a><div class="comment-body"><div class="comment-heading"><h4 class="user">' +
+                user +
+                '</h4><h5 class="time">' +
+                updated_at +
+                "</h5></div><p>" +
+                body +
                 "</p></div></li>";
 
             var new_obj = $(commentHtml);
-            $('#commentsList').append(new_obj);
-
+            $("#commentsList").append(new_obj);
         }
     });
-
 }
 
 function login() {
-    $('#myModal').modal();
+    $("#myModal").modal();
 }
 
 function subComment() {
-
     var USERNAME = $("#txt_username").val();
     var PASSWORD = document.getElementById("txt_password").value; //
     var title = null;
     title = $("#title").text();
     // 未开启评论
-    if (typeof($("#commentsList").attr("data_comments_url")) == "undefined") {
+    if (typeof $("#commentsList").attr("data_comments_url") == "undefined") {
         if (title == undefined || title == null || title == "") {
             return;
         }
 
-        var createIssueJson = "{\"title\": \"" + title + "\"}";
+        var createIssueJson = '{"title": "' + title + '"}';
         console.log(createIssueJson);
         $.ajax({
             type: "POST",
             url: issuesList,
-            dataType: 'json',
+            dataType: "json",
             async: false,
             headers: {
-                "Authorization": "Basic " + btoa(USERNAME + ":" + PASSWORD)
+                Authorization: "Basic " + btoa(USERNAME + ":" + PASSWORD)
             },
             data: createIssueJson,
             success: function() {
-                console.log('开启评论成功:' + title);
+                console.log("开启评论成功:" + title);
                 //重新遍历issue list
                 setCommentURL(issuesList, title);
-                console.log('重新遍历 issuesList 完成');
-
+                console.log("重新遍历 issuesList 完成");
             }
         });
     }
     console.log("准备提交评论");
     // 已开启评论
-    if (typeof($("#commentsList").attr("data_comments_url")) != "undefined") {
+    if (typeof $("#commentsList").attr("data_comments_url") != "undefined") {
         var issueURL = $("#commentsList").attr("data_comments_url");
         var comment = $("#comment_txt").val();
-        var commentJson = "{\"body\": \"" + comment + "\"}";
+        var commentJson = '{"body": "' + comment + '"}';
         console.log(comment);
         if (comment == "") {
             alert("评论不能为空");
@@ -279,14 +275,14 @@ function subComment() {
         $.ajax({
             type: "POST",
             url: issueURL,
-            dataType: 'json',
+            dataType: "json",
             async: false,
             headers: {
-                "Authorization": "Basic " + btoa(USERNAME + ":" + PASSWORD)
+                Authorization: "Basic " + btoa(USERNAME + ":" + PASSWORD)
             },
             data: commentJson,
             success: function() {
-                console.log('评论成功');
+                console.log("评论成功");
 
                 // 更新评论区
                 if (title != null) {
@@ -298,10 +294,9 @@ function subComment() {
             }
         });
     } else {
-        console.log("未开启评论")
+        console.log("未开启评论");
     }
 }
-
 
 function getTitleString() {
     var reg = new RegExp("(^|&)" + "title" + "=([^&]*)(&|$)");
@@ -309,3 +304,106 @@ function getTitleString() {
     if (r != null) return decodeURI(r[2]);
     return null;
 }
+
+var ghJson = {
+    gh: {
+        user: "eastzq",
+        baseBlogUrl:
+            "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog",
+        issuesList:
+            "https://api.github.com/repos/eastzq/eastzq.github.io/issues",
+        issuesHTML: "https://github.com/eastzq/eastzq.github.io/issues",
+        readmeURL:
+            "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md"
+    },
+    blogTree: [
+        {
+            text: "Markdown语法.md",
+            children: [],
+            origin: {
+                name: "Markdown语法.md",
+                path: "blog/Markdown语法.md",
+                sha: "be149ee71f0eb49452d3eed82102d5249d55c6b9",
+                size: 5069,
+                url:
+                    "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/Markdown%E8%AF%AD%E6%B3%95.md?ref=master",
+                html_url:
+                    "https://github.com/eastzq/eastzq.github.io/blob/master/blog/Markdown%E8%AF%AD%E6%B3%95.md",
+                git_url:
+                    "https://api.github.com/repos/eastzq/eastzq.github.io/git/blobs/be149ee71f0eb49452d3eed82102d5249d55c6b9",
+                download_url:
+                    "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/Markdown%E8%AF%AD%E6%B3%95.md",
+                type: "file",
+                _links: {
+                    self:
+                        "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/Markdown%E8%AF%AD%E6%B3%95.md?ref=master",
+                    git:
+                        "https://api.github.com/repos/eastzq/eastzq.github.io/git/blobs/be149ee71f0eb49452d3eed82102d5249d55c6b9",
+                    html:
+                        "https://github.com/eastzq/eastzq.github.io/blob/master/blog/Markdown%E8%AF%AD%E6%B3%95.md"
+                }
+            },
+            type: "file",
+            url:
+                "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/Markdown%E8%AF%AD%E6%B3%95.md"
+        },
+        {
+            text: "java",
+            children: [
+                {
+                    text: "a.md",
+                    children: [],
+                    origin: {
+                        name: "a.md",
+                        path: "blog/java/a.md",
+                        sha: "fced2750c3fa3d28caacad6cab28e06a29fd75b2",
+                        size: 32,
+                        url:
+                            "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/java/a.md?ref=master",
+                        html_url:
+                            "https://github.com/eastzq/eastzq.github.io/blob/master/blog/java/a.md",
+                        git_url:
+                            "https://api.github.com/repos/eastzq/eastzq.github.io/git/blobs/fced2750c3fa3d28caacad6cab28e06a29fd75b2",
+                        download_url:
+                            "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/java/a.md",
+                        type: "file",
+                        _links: {
+                            self:
+                                "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/java/a.md?ref=master",
+                            git:
+                                "https://api.github.com/repos/eastzq/eastzq.github.io/git/blobs/fced2750c3fa3d28caacad6cab28e06a29fd75b2",
+                            html:
+                                "https://github.com/eastzq/eastzq.github.io/blob/master/blog/java/a.md"
+                        }
+                    },
+                    type: "file",
+                    url:
+                        "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/java/a.md"
+                }
+            ],
+            origin: {
+                name: "java",
+                path: "blog/java",
+                sha: "c1906e42ecbebc276e08a1da49fc23f2da67bc02",
+                size: 0,
+                url:
+                    "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/java?ref=master",
+                html_url:
+                    "https://github.com/eastzq/eastzq.github.io/tree/master/blog/java",
+                git_url:
+                    "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/c1906e42ecbebc276e08a1da49fc23f2da67bc02",
+                download_url: null,
+                type: "dir",
+                _links: {
+                    self:
+                        "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/java?ref=master",
+                    git:
+                        "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/c1906e42ecbebc276e08a1da49fc23f2da67bc02",
+                    html:
+                        "https://github.com/eastzq/eastzq.github.io/tree/master/blog/java"
+                }
+            },
+            type: "dir"
+        }
+    ]
+};
