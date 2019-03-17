@@ -24,7 +24,6 @@ var Api = (function() {
         api.blogTree = Api.genBlogTree(gh.baseBlogUrl);
         // api.blogTree = ghJson.blogTree;
         Api.renderBlogTree(api.blogTreeSelector, api.blogTree);
-        Api.renderBlogTxt();
         Api.renderAboutMe();
         return api;
     };
