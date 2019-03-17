@@ -24,6 +24,8 @@ var Api = (function() {
         api.blogTree = Api.genBlogTree(gh.baseBlogUrl);
         // api.blogTree = ghJson.blogTree;
         Api.renderBlogTree(api.blogTreeSelector, api.blogTree);
+        Api.renderBlogTxt();
+        Api.renderAboutMe();
         return api;
     };
 
@@ -125,10 +127,17 @@ var Api = (function() {
                 sequenceDiagram: true // 默认不解析
             });
         });
-
         //get comments_url
         // setCommentURL(issuesList, blogName);
     };
+    M.renderAboutMe = function(){
+        var node= {
+            blogUrl:"https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/aboutme/About Me.md",
+            blogPath:"/blog/aboutme/",
+            name:作者介绍
+        }
+        M.renderBlogTxt(node);
+    }
     return M;
 })();
 $(document).ready(function() {
@@ -274,5 +283,3 @@ function getTitleString() {
     if (r != null) return decodeURI(r[2]);
     return null;
 }
-
-var ghJson;
