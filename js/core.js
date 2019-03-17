@@ -20,8 +20,8 @@ var Api = (function() {
         var api = new Api();
         api.gh = gh;
         api.blogTreeSelector = '#blogTree';
-        // api.blogTree = Api.genBlogTree(gh.baseBlogUrl);
-        api.blogTree = ghJson.blogTree;
+        api.blogTree = Api.genBlogTree(gh.baseBlogUrl);
+        // api.blogTree = ghJson.blogTree;
         Api.renderBlogTree(api.blogTreeSelector,api.blogTree);
         return api;
     };
@@ -305,105 +305,4 @@ function getTitleString() {
     return null;
 }
 
-var ghJson = {
-    gh: {
-        user: "eastzq",
-        baseBlogUrl:
-            "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog",
-        issuesList:
-            "https://api.github.com/repos/eastzq/eastzq.github.io/issues",
-        issuesHTML: "https://github.com/eastzq/eastzq.github.io/issues",
-        readmeURL:
-            "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md"
-    },
-    blogTree: [
-        {
-            text: "Markdown语法.md",
-            children: [],
-            origin: {
-                name: "Markdown语法.md",
-                path: "blog/Markdown语法.md",
-                sha: "be149ee71f0eb49452d3eed82102d5249d55c6b9",
-                size: 5069,
-                url:
-                    "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/Markdown%E8%AF%AD%E6%B3%95.md?ref=master",
-                html_url:
-                    "https://github.com/eastzq/eastzq.github.io/blob/master/blog/Markdown%E8%AF%AD%E6%B3%95.md",
-                git_url:
-                    "https://api.github.com/repos/eastzq/eastzq.github.io/git/blobs/be149ee71f0eb49452d3eed82102d5249d55c6b9",
-                download_url:
-                    "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/Markdown%E8%AF%AD%E6%B3%95.md",
-                type: "file",
-                _links: {
-                    self:
-                        "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/Markdown%E8%AF%AD%E6%B3%95.md?ref=master",
-                    git:
-                        "https://api.github.com/repos/eastzq/eastzq.github.io/git/blobs/be149ee71f0eb49452d3eed82102d5249d55c6b9",
-                    html:
-                        "https://github.com/eastzq/eastzq.github.io/blob/master/blog/Markdown%E8%AF%AD%E6%B3%95.md"
-                }
-            },
-            type: "file",
-            url:
-                "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/Markdown%E8%AF%AD%E6%B3%95.md"
-        },
-        {
-            text: "java",
-            children: [
-                {
-                    text: "a.md",
-                    children: [],
-                    origin: {
-                        name: "a.md",
-                        path: "blog/java/a.md",
-                        sha: "fced2750c3fa3d28caacad6cab28e06a29fd75b2",
-                        size: 32,
-                        url:
-                            "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/java/a.md?ref=master",
-                        html_url:
-                            "https://github.com/eastzq/eastzq.github.io/blob/master/blog/java/a.md",
-                        git_url:
-                            "https://api.github.com/repos/eastzq/eastzq.github.io/git/blobs/fced2750c3fa3d28caacad6cab28e06a29fd75b2",
-                        download_url:
-                            "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/java/a.md",
-                        type: "file",
-                        _links: {
-                            self:
-                                "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/java/a.md?ref=master",
-                            git:
-                                "https://api.github.com/repos/eastzq/eastzq.github.io/git/blobs/fced2750c3fa3d28caacad6cab28e06a29fd75b2",
-                            html:
-                                "https://github.com/eastzq/eastzq.github.io/blob/master/blog/java/a.md"
-                        }
-                    },
-                    type: "file",
-                    url:
-                        "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/java/a.md"
-                }
-            ],
-            origin: {
-                name: "java",
-                path: "blog/java",
-                sha: "c1906e42ecbebc276e08a1da49fc23f2da67bc02",
-                size: 0,
-                url:
-                    "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/java?ref=master",
-                html_url:
-                    "https://github.com/eastzq/eastzq.github.io/tree/master/blog/java",
-                git_url:
-                    "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/c1906e42ecbebc276e08a1da49fc23f2da67bc02",
-                download_url: null,
-                type: "dir",
-                _links: {
-                    self:
-                        "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/java?ref=master",
-                    git:
-                        "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/c1906e42ecbebc276e08a1da49fc23f2da67bc02",
-                    html:
-                        "https://github.com/eastzq/eastzq.github.io/tree/master/blog/java"
-                }
-            },
-            type: "dir"
-        }
-    ]
-};
+var ghJson ;
