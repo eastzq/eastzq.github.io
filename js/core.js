@@ -104,8 +104,8 @@ var Api = (function() {
                             "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/" +
                             path;
                         var pArr = blogTree;
-                        for(var j = 1;j<arr.length-1;j++){
-                            var temp = arr[i];
+                        for(var j = 0;j<arr.length-1;j++){
+                            var temp = arr[j];
                             var target = M.findObjInArrayByName(pArr,temp);
                             if(target){
                                 pArr = target.children;
