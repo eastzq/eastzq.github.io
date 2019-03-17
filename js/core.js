@@ -4,7 +4,7 @@ var Api = (function() {
     var M = function() {};
     M.init = function() {
 
-        $("#header").text(user + "'s Blog");
+        $("#header").text("eastzq's Blog");
         $("#commentsList").removeAttr('data_comments_url');
         $("#tips").html("我们不会获取您的用户名和密码,评论直接通过 HTTPS 与 Github API交互,<br>如果您开启了两步验证,请在博客的<a  target=\"_blank\" href=\"" + issuesHTML + "\">Github issues</a>下添加 Comment");
         var gh = {};
