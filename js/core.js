@@ -1,5 +1,16 @@
 var issuesList;
 var issuesHTML;
+var gh = {
+    baseBlogUrl:
+        "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog",
+    issuesList: "https://api.github.com/repos/eastzq/eastzq.github.io/issues",
+    issuesHTML: "https://github.com/eastzq/eastzq.github.io/issues",
+    readmeURL:
+        "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md",
+    treeUrl:
+        "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/master?recursive=1"
+};
+
 var Api = (function() {
     var M = function() {};
     M.init = function() {
@@ -10,25 +21,14 @@ var Api = (function() {
                 issuesHTML +
                 '">Github issues</a>下添加 Comment'
         );
-        var gh = {};
-        gh.baseBlogUrl =
-            "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog";
-        gh.issuesList =
-            "https://api.github.com/repos/eastzq/eastzq.github.io/issues";
-        gh.issuesHTML = "https://github.com/eastzq/eastzq.github.io/issues";
-        gh.readmeURL =
-            "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md";
-        var api = new Api();
-        api.gh = gh;
-        api.blogTreeSelector = "#blogTree";
-        api.blogTree = Api.genBlogTree(gh.baseBlogUrl);
+        gh.blogTree = Api.genBlogTree2(gh.treeUrl);
         // api.blogTree = ghJson.blogTree;
-        Api.renderBlogTree(api.blogTreeSelector, api.blogTree);
+        Api.renderBlogTree("#blogTree", gh.blogTree);
         Api.renderAboutMe();
-        return api;
     };
 
     //递归生成博客树 效率低，但是目前文件较少，以后可以改成懒加载。
+    // github api有限制访问频率，所以递归容易产生太多请求，不合适。
     M.genBlogTree = function(contentUrl) {
         var blogTree = [];
         $.ajax({
@@ -48,8 +48,15 @@ var Api = (function() {
                         node.origin = obj;
                         node.name = obj.name;
                         node.type = fileType;
-                        node.blogPath='/'+obj.path.substring(0,obj.path.lastIndexOf('/')+1);
-                        node.blogUrl = obj.download_url;
+                        node.blogPath =
+                            "/" +
+                            obj.path.substring(
+                                0,
+                                obj.path.lastIndexOf("/") + 1
+                            );
+                        node.blogUrl =
+                            "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/" +
+                            path;
                         blogTree.push(node);
                     } else if (fileType === "dir") {
                         node.origin = obj;
@@ -63,6 +70,65 @@ var Api = (function() {
         });
         return blogTree;
     };
+
+    //使用另外一个api来生成文件树。
+    M.genBlogTree2 = function(treeUrl) {
+        var blogTree = [];
+        $.ajax({
+            dataType: "json",
+            url: treeUrl,
+            async: true,
+            success: function(json) {
+                for (var i = 0; i < json.length; i++) {
+                    var node = {
+                        name: ""
+                    };
+                    var obj = json[i];
+                    var path = obj.path;
+                    var arr = path.split("/");
+                    if (arr[0] !== "blog") {
+                        return;
+                    }
+                    var fileName = arr[arr.length - 1];
+                    var fileType;
+                    if (obj.type === "blob") {
+                        fileType = "file";
+                    } else {
+                        fileType = "dir";
+                    }
+                    if (fileType === "file" && Api.isMarkdown(fileName)) {
+                        node.origin = obj;
+                        node.name = fileName;
+                        node.type = fileType;
+                        node.blogPath =
+                            "/" + path.substring(0, path.lastIndexOf("/") + 1);
+                        node.blogUrl =
+                            "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/" +
+                            path;
+                        var pArr = blogTree;
+                        for(var j = 1;j<arr.length-1;j++){
+                            var temp = arr[i];
+                            var target = M.findObjInArrayByName(pArr,temp);
+                            if(target){
+                                pArr = target.children;
+                            }else{
+                                var pnode={
+                                    name:temp,
+                                    type:"dir",
+                                    children:[]                           
+                                 };
+                                pArr.push(pnode);
+                                pArr = pnode.children;
+                            }
+                        }
+                        pArr.push(node);
+                    }
+                }
+            }
+        });
+        return blogTree;
+    };
+
     M.isMarkdown = function(fileName) {
         var index = fileName.lastIndexOf(".");
         //获取后缀
@@ -81,6 +147,14 @@ var Api = (function() {
             }
         };
         $.fn.zTree.init($(blogTreeSelector), setting, data);
+    };
+    M.findObjInArrayByName = function(arr,name){
+        for(var i =0;i<arr.length;i++){
+            if(arr[i].name === name){
+                return arr[i];
+            }
+        }
+        return false;
     };
     M.renderBlogTxt = function(node) {
         // 隐藏Button，响应式布局用。
@@ -103,10 +177,10 @@ var Api = (function() {
             var patten = /\[([^\]])*?\.(jpg|gif|png)\]/gi;
             var md = result.replace(patten, function(match) {
                 var picPath = match.substring(1, match.lastIndexOf("]"));
-                if(picPath.startsWith("http") || picPath.startsWith('/')){
+                if (picPath.startsWith("http") || picPath.startsWith("/")) {
                     return false;
                 }
-                var r = "["+blogPath+picPath+"]";
+                var r = "[" + blogPath + picPath + "]";
                 return r;
             });
             editormd.markdownToHTML("article", {
@@ -129,15 +203,16 @@ var Api = (function() {
         //get comments_url
         // setCommentURL(issuesList, blogName);
     };
-    M.renderAboutMe = function(){
-        var node= {
-            blogUrl:"https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/ABOUT/About Me.md",
-            blogPath:"/blog/aboutme/",
-            name:"作者介绍",
-            type:'file'
-        }
+    M.renderAboutMe = function() {
+        var node = {
+            blogUrl:
+                "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/ABOUT/About Me.md",
+            blogPath: "/blog/aboutme/",
+            name: "作者介绍",
+            type: "file"
+        };
         M.renderBlogTxt(node);
-    }
+    };
     return M;
 })();
 $(document).ready(function() {
