@@ -3,10 +3,13 @@ var issuesHTML;
 var Api = (function() {
     var M = function() {};
     M.init = function() {
-
         $("#header").text("eastzq's Blog");
-        $("#commentsList").removeAttr('data_comments_url');
-        $("#tips").html("我们不会获取您的用户名和密码,评论直接通过 HTTPS 与 Github API交互,<br>如果您开启了两步验证,请在博客的<a  target=\"_blank\" href=\"" + issuesHTML + "\">Github issues</a>下添加 Comment");
+        $("#commentsList").removeAttr("data_comments_url");
+        $("#tips").html(
+            '我们不会获取您的用户名和密码,评论直接通过 HTTPS 与 Github API交互,<br>如果您开启了两步验证,请在博客的<a  target="_blank" href="' +
+                issuesHTML +
+                '">Github issues</a>下添加 Comment'
+        );
         var gh = {};
         gh.baseBlogUrl =
             "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog";
@@ -17,11 +20,10 @@ var Api = (function() {
             "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md";
         var api = new Api();
         api.gh = gh;
-        api.blogTreeSelector = '#blogTree';
+        api.blogTreeSelector = "#blogTree";
         api.blogTree = Api.genBlogTree(gh.baseBlogUrl);
         // api.blogTree = ghJson.blogTree;
-        Api.renderBlogTree(api.blogTreeSelector,api.blogTree);
-
+        Api.renderBlogTree(api.blogTreeSelector, api.blogTree);
         return api;
     };
 
@@ -45,6 +47,7 @@ var Api = (function() {
                         node.origin = obj;
                         node.name = obj.name;
                         node.type = fileType;
+                        node.blogPath='/'+obj.path.substring(0,obj.path.lastIndexOf('/')+1);
                         node.blogUrl = obj.download_url;
                         blogTree.push(node);
                     } else if (fileType === "dir") {
@@ -67,69 +70,71 @@ var Api = (function() {
         return ext === "md" || ext === "markdown";
     };
 
-    M.renderBlogTree = function(blogTreeSelector,data){
-        var onClick = function(event, treeId, treeNode){
+    M.renderBlogTree = function(blogTreeSelector, data) {
+        var onClick = function(event, treeId, treeNode) {
             M.renderBlogTxt(treeNode);
-        }
+        };
         var setting = {
             callback: {
-                onClick: onClick,
+                onClick: onClick
             }
         };
         $.fn.zTree.init($(blogTreeSelector), setting, data);
-    }
-    M.renderBlogTxt=function(node){
-        // 隐藏Button
+    };
+    M.renderBlogTxt = function(node) {
+        // 隐藏Button，响应式布局用。
         if (!$("#btnNav").is(":hidden")) {
             $("#btnNav").click();
         }
-    
-        obj = $(obj);
-        var blogName = obj.attr("data_name");
-        var blogURL = obj.attr("data_blogURL");
-        var type = obj.attr("data_type");
+        if (node.type !== "file") {
+            return;
+        }
+        var blogUrl = node.blogUrl;
+        var blogPath = node.blogPath;
+        var blogName = node.name;
         $("#title").text(blogName);
         $("#article").html("loading . . .");
-    
+
         // set blog content
-        $.get(blogURL, function(result) {
-            $("#title").show();
-            if (type == "markdown") {
-                $("#article").html("");
-                testEditormdView = editormd.markdownToHTML("article", {
-                    markdown: result, //+ "\r\n" + $("#append-test").text(),
-                    // htmlDecode: true, // 开启 HTML 标签解析，为了安全性，默认不开启
-                    htmlDecode: "style,script,iframe", // you can filter tags decode
-                    // toc             : true,
-                    tocm: true, // Using [TOCM]
-                    //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
-                    //gfm             : false,
-                    //tocDropdown     : true,
-                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
-                    emoji: true,
-                    taskList: true,
-                    tex: true, // 默认不解析
-                    flowChart: true, // 默认不解析
-                    sequenceDiagram: true // 默认不解析
-                });
-            } else {
-                $("#title").hide();
-                $("#article").html(result);
-            }
+        $.get(blogUrl, function(result) {
+            $("#article").html("");
+            //替换markdown里的图片的路径
+            var patten = /\[([^\]])*?\.(jpg|gif|png)\]/gi;
+            var md = result.replace(patten, function(match) {
+                var picPath = match.substring(1, match.lastIndexOf("]"));
+                if(picPath.startsWith("http") || picPath.startsWith('/')){
+                    return false;
+                }
+                var r = "["+blogPath+picPath+"]";
+                return r;
+            });
+            editormd.markdownToHTML("article", {
+                markdown: md, //+ "\r\n" + $("#append-test").text(),
+                // htmlDecode: true, // 开启 HTML 标签解析，为了安全性，默认不开启
+                htmlDecode: "style,script,iframe", // you can filter tags decode
+                // toc             : true,
+                tocm: true, // Using [TOCM]
+                //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                //gfm             : false,
+                //tocDropdown     : true,
+                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                emoji: true,
+                taskList: true,
+                tex: true, // 默认不解析
+                flowChart: true, // 默认不解析
+                sequenceDiagram: true // 默认不解析
+            });
         });
-    
+
         //get comments_url
-        setCommentURL(issuesList, blogName);
-    }
+        // setCommentURL(issuesList, blogName);
+    };
     return M;
 })();
 $(document).ready(function() {
     var main = Api.init();
     console.log(main);
 });
-
-
-
 
 function setCommentURL(issuesList, blogName) {
     $("#comments").show();
@@ -270,4 +275,4 @@ function getTitleString() {
     return null;
 }
 
-var ghJson ;
+var ghJson;
