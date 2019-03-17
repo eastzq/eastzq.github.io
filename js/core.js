@@ -134,7 +134,8 @@ var Api = (function() {
         var node= {
             blogUrl:"https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/aboutme/About Me.md",
             blogPath:"/blog/aboutme/",
-            name:作者介绍
+            name:作者介绍,
+            type:'file'
         }
         M.renderBlogTxt(node);
     }
