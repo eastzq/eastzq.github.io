@@ -21,6 +21,7 @@ var Api = (function() {
                 issuesHTML +
                 '">Github issues</a>下添加 Comment'
         );
+        Api.genBlogTree2(gh.treeUrl);
         Api.renderAboutMe();
     };
 
