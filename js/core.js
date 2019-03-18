@@ -1,15 +1,12 @@
 var issuesList;
 var issuesHTML;
 var gh = {
-    baseBlogUrl:
-        "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog",
+    baseBlogUrl: "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog",
     issuesList: "https://api.github.com/repos/eastzq/eastzq.github.io/issues",
     issuesHTML: "https://github.com/eastzq/eastzq.github.io/issues",
-    readmeURL:
-        "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md",
-    treeUrl:
-        "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/master?recursive=1",
-    cache:{}
+    readmeURL: "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/About Me.md",
+    treeUrl: "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/master?recursive=1",
+    cache: {}
 };
 
 var Api = (function() {
@@ -19,8 +16,8 @@ var Api = (function() {
         $("#commentsList").removeAttr("data_comments_url");
         $("#tips").html(
             '我们不会获取您的用户名和密码,评论直接通过 HTTPS 与 Github API交互,<br>如果您开启了两步验证,请在博客的<a  target="_blank" href="' +
-                issuesHTML +
-                '">Github issues</a>下添加 Comment'
+            issuesHTML +
+            '">Github issues</a>下添加 Comment'
         );
         Api.genBlogTree2(gh.treeUrl);
         Api.renderAboutMe();
@@ -105,17 +102,17 @@ var Api = (function() {
                             "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/" +
                             path;
                         var pArr = blogTree;
-                        for(var j = 0;j<arr.length-1;j++){
+                        for (var j = 0; j < arr.length - 1; j++) {
                             var temp = arr[j];
-                            var target = M.findObjInArrayByName(pArr,temp);
-                            if(target){
+                            var target = M.findObjInArrayByName(pArr, temp);
+                            if (target) {
                                 pArr = target.children;
-                            }else{
-                                var pnode={
-                                    name:temp,
-                                    type:"dir",
-                                    children:[]                           
-                                 };
+                            } else {
+                                var pnode = {
+                                    name: temp,
+                                    type: "dir",
+                                    children: []
+                                };
                                 pArr.push(pnode);
                                 pArr = pnode.children;
                             }
@@ -149,9 +146,9 @@ var Api = (function() {
         };
         $.fn.zTree.init($(blogTreeSelector), setting, data);
     };
-    M.findObjInArrayByName = function(arr,name){
-        for(var i =0;i<arr.length;i++){
-            if(arr[i].name === name){
+    M.findObjInArrayByName = function(arr, name) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i].name === name) {
                 return arr[i];
             }
         }
@@ -171,16 +168,16 @@ var Api = (function() {
         $("#title").text(blogName);
         $("#article").html("loading . . .");
 
-        var renderMd=  function(md){
+        var renderMd = function(md) {
             editormd.markdownToHTML("article", {
                 markdown: md, //+ "\r\n" + $("#append-test").text(),
                 // htmlDecode: true, // 开启 HTML 标签解析，为了安全性，默认不开启
                 htmlDecode: "style,script,iframe", // you can filter tags decode
-                // toc             : true,
+                toc: true,
                 tocm: true, // Using [TOCM]
-                //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                // tocContainer: "#md_toc_container", // 自定义 ToC 容器层
                 //gfm             : false,
-                //tocDropdown     : true,
+                tocDropdown: true,
                 // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
                 emoji: true,
                 taskList: true,
@@ -189,10 +186,10 @@ var Api = (function() {
                 sequenceDiagram: true // 默认不解析
             });
         }
-        
-        if(gh.cache.blogUrl){
+
+        if (gh.cache.blogUrl) {
             gh.renderMd(gh.cache.blogUrl);
-        }else{
+        } else {
             // set blog content
             $.get(blogUrl, function(result) {
                 $("#article").html("");
@@ -215,8 +212,7 @@ var Api = (function() {
     };
     M.renderAboutMe = function() {
         var node = {
-            blogUrl:
-                "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/ABOUT/About Me.md",
+            blogUrl: "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/ABOUT/About Me.md",
             blogPath: "/blog/aboutme/",
             name: "作者介绍",
             type: "file"

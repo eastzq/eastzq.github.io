@@ -2,113 +2,114 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="tinyblog" content="v1.2">
-	<title>eastzq的笔记本</title>
-	<!-- jquery -->
-	<script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
-	<!-- bootstrap -->
-	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<!-- bootstrap treeview -->
-	<link href="./lib/bootstrap-treeview/bootstrap-treeview.css" rel="stylesheet">
-	<script src="./lib/bootstrap-treeview/bootstrap-treeview.js"></script>
-	<!-- font-awsome -->
-	<link href="//cdn.bootcss.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<!-- ztree -->
-	<link href="https://cdn.bootcss.com/zTree.v3/3.5.40/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
-	<script src="https://cdn.bootcss.com/zTree.v3/3.5.40/js/jquery.ztree.all.js"></script>
-	
-	<!--markdown-->
-	<link rel="stylesheet" href="./lib/editor.md/css/editormd.preview.min.css" />
-	<script src="./lib/editor.md/lib/marked.min.js"></script>
-	<script src="./lib/editor.md/lib/prettify.min.js"></script>
-	<script src="./lib/editor.md/lib/raphael.min.js"></script>
-	<script src="./lib/editor.md/lib/underscore.min.js"></script>
-	<script src="./lib/editor.md/lib/sequence-diagram.min.js"></script>
-	<script src="./lib/editor.md/lib/flowchart.min.js"></script>
-	<script src="./lib/editor.md/lib/jquery.flowchart.min.js"></script>
-	<script src="./lib/editor.md/editormd.min.js"></script>
-	
-	<!-- myscript -->
-	<link href="./css/mystyle.css" rel="stylesheet">
-	<script src="./js/core.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="tinyblog" content="v1.2">
+    <title>eastzq的笔记本</title>
+    <!-- jquery -->
+    <script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- bootstrap treeview -->
+    <link href="./lib/bootstrap-treeview/bootstrap-treeview.css" rel="stylesheet">
+    <script src="./lib/bootstrap-treeview/bootstrap-treeview.js"></script>
+    <!-- font-awsome -->
+    <link href="//cdn.bootcss.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- ztree -->
+    <link href="https://cdn.bootcss.com/zTree.v3/3.5.40/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/zTree.v3/3.5.40/js/jquery.ztree.all.js"></script>
+
+    <!--markdown-->
+    <link rel="stylesheet" href="./lib/editor.md/css/editormd.preview.min.css" />
+    <script src="./lib/editor.md/lib/marked.min.js"></script>
+    <script src="./lib/editor.md/lib/prettify.min.js"></script>
+    <script src="./lib/editor.md/lib/raphael.min.js"></script>
+    <script src="./lib/editor.md/lib/underscore.min.js"></script>
+    <script src="./lib/editor.md/lib/sequence-diagram.min.js"></script>
+    <script src="./lib/editor.md/lib/flowchart.min.js"></script>
+    <script src="./lib/editor.md/lib/jquery.flowchart.min.js"></script>
+    <script src="./lib/editor.md/editormd.min.js"></script>
+
+    <!-- myscript -->
+    <link href="./css/mystyle.css" rel="stylesheet">
+    <script src="./js/core.js"></script>
 
 </head>
 
 <body>
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" id="btnNav">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" id="btnNav">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-				<a class="navbar-brand" href="#" id="header">BlogName</a>
-			</div>
-		</div>
-		<!-- /.container -->
-	</nav>
+                <a class="navbar-brand" href="#" id="header">BlogName</a>
+            </div>
+        </div>
+        <!-- /.container -->
+    </nav>
 
-	<div class="container-fluid ">
-		<div class="row">
+    <div class="container-fluid ">
+        <div class="row">
 
-			<div class="col-sm-3 col-md-2 sidebar ">
-				<ul class="nav nav-sidebar" id="bs-example-navbar-collapse-1">
-					<div id="blogTree" class="ztree"></div>
-				</ul>
-			</div>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<!--正文-->
-				<h1 class="page-header" id="title"></h1>
-				<div id="article"></div>
+            <div class="col-sm-3 col-md-2 sidebar ">
+                <ul class="nav nav-sidebar" id="bs-example-navbar-collapse-1">
+                    <div id="blogTree" class="ztree"></div>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <!--正文-->
+                <h1 class="page-header" id="title"></h1>
+                <div id="md_toc_container"></div>
+                <div id="article"></div>
 
-				<div class="panel panel-white post " id="comments">
-					<div class="post-footer">
-						<div class="input-group">
-							<input id="comment_txt" class="form-control" placeholder="Add a comment" type="text">
-							<span class="input-group-addon">
+                <div class="panel panel-white post " id="comments">
+                    <div class="post-footer">
+                        <div class="input-group">
+                            <input id="comment_txt" class="form-control" placeholder="Add a comment" type="text">
+                            <span class="input-group-addon">
                         <a href="#"><i class="fa fa-edit" onclick="login()"></i></a>  
                     </span>
-						</div>
-						<ul class="comments-list" id="commentsList">
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </div>
+                        <ul class="comments-list" id="commentsList">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-					<h4 class="modal-title" id="myModalLabel">登录</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="txt_departmentlevel">Username</label>
-						<input type="text" name="txt_departmentlevel" class="form-control" id="txt_username" placeholder="Github用户名">
-					</div>
-					<div class="form-group">
-						<label for="txt_statu">Password</label>
-						<input type="password" name="txt_statu" class="form-control" id="txt_password" placeholder="Github密码">
-					</div>
-					<div class="alert alert-warning" role="alert" id="tips">我们不会获取您的用户名和密码,评论直接通过 HTTPS 与 Github API交互,如果您开启了两步验证,请在博客的Github issues 下添加 Comment</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="btn_subComment" class="btn btn-primary" data-dismiss="modal" onclick="subComment()">提交</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">登录</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="txt_departmentlevel">Username</label>
+                        <input type="text" name="txt_departmentlevel" class="form-control" id="txt_username" placeholder="Github用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_statu">Password</label>
+                        <input type="password" name="txt_statu" class="form-control" id="txt_password" placeholder="Github密码">
+                    </div>
+                    <div class="alert alert-warning" role="alert" id="tips">我们不会获取您的用户名和密码,评论直接通过 HTTPS 与 Github API交互,如果您开启了两步验证,请在博客的Github issues 下添加 Comment</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn_subComment" class="btn btn-primary" data-dismiss="modal" onclick="subComment()">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
