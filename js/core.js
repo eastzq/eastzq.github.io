@@ -21,7 +21,23 @@ var Api = (function() {
         );
         Api.genBlogTree2(gh.treeUrl);
         Api.renderAboutMe();
+
+        $('#md_toc_container').on('click', 'a', function() {
+            M.anchorHandle(this.hash)
+        });
+        if (location.hash) { M.anchorHandle(location.hash) }
     };
+    /* 解决锚点定位不准确的问题 */
+    M.anchorHandle = function(hash) {
+        var target = decodeURIComponent(hash);
+        var temp = target.substring(1);
+        var $t = $("a[name='" + temp + "']");
+        if ($t.length === 0) return;
+        var targetOffset = $t.offset().top - 60;
+        $('html,body').animate({ scrollTop: targetOffset }, 300);
+    }
+
+
 
     //递归生成博客树 效率低，但是目前文件较少，以后可以改成懒加载。
     // github api有限制访问频率，所以递归容易产生太多请求，不合适。
@@ -173,20 +189,15 @@ var Api = (function() {
                 markdown: md, //+ "\r\n" + $("#append-test").text(),
                 // htmlDecode: true, // 开启 HTML 标签解析，为了安全性，默认不开启
                 htmlDecode: "style,script,iframe", // you can filter tags decode
-                toc: true,
-                tocm: true, // Using [TOCM]
-                // tocContainer: "#md_toc_container", // 自定义 ToC 容器层
-                //gfm             : false,
-                tocDropdown: true,
-                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                tocContainer: "#md_toc_container", // 自定义 ToC 容器层
                 emoji: true,
                 taskList: true,
                 tex: true, // 默认不解析
                 flowChart: true, // 默认不解析
                 sequenceDiagram: true // 默认不解析
             });
+            $("#md-toc-container").find("a").addClass("anchor-fixed");
         }
-
         if (gh.cache.blogUrl) {
             gh.renderMd(gh.cache.blogUrl);
         } else {
