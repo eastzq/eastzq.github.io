@@ -22,9 +22,7 @@ var Api = (function() {
         Api.genBlogTree2(gh.treeUrl);
         var tid = Api.getUrlParams("tid");
         Api.renderAboutMe(tid);
-        $('#md_toc_container').on('click', 'a', function() {
-            M.anchorHandle(this.hash)
-        });
+        Api.bindEvent();
         if (location.hash) { M.anchorHandle(location.hash) }
     };
     /* 解决锚点定位不准确的问题 */
@@ -37,6 +35,17 @@ var Api = (function() {
         $('html,body').animate({ scrollTop: targetOffset }, 200);
     }
 
+    M.bindEvent = function() {
+        $('#md_toc_container').on('click', 'a', function() {
+            M.anchorHandle(this.hash)
+        });
+        $('#btnNav2').on('click', function() {
+            $(".sidebar").toggle(200);
+        });
+        $('#btnNav1').on('click', function() {
+            $(".md-toc-container").toggle(200);
+        });
+    }
     M.getUrlParams = function(variable) {
         var search = window.location.search;
         var query;
@@ -264,8 +273,10 @@ var Api = (function() {
             node.blogPath =
                 "/" + tid.substring(0, tid.lastIndexOf("/") + 1);
             node.blogUrl = gh.baseBlogUrl + tid;
+            M.renderBlogTxt(node, true);
+        } else {
+            M.renderBlogTxt(node);
         }
-        M.renderBlogTxt(node, true);
     };
     return M;
 })();
