@@ -1,6 +1,7 @@
 var issuesList;
 var issuesHTML;
 var gh = {
+    username: "eastzq",
     issuesList: "https://api.github.com/repos/eastzq/eastzq.github.io/issues",
     issuesHTML: "https://github.com/eastzq/eastzq.github.io/issues",
     readmeURL: "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/ABOUT/About Me.md",
@@ -12,7 +13,7 @@ var gh = {
 var Api = (function() {
     var M = function() {};
     M.init = function() {
-        $("#header").text("eastzq's Blog");
+        $("#header").text(gh.username + "'s notebook");
         $("#commentsList").removeAttr("data_comments_url");
         $("#tips").html(
             '我们不会获取您的用户名和密码,评论直接通过 HTTPS 与 Github API交互,<br>如果您开启了两步验证,请在博客的<a  target="_blank" href="' +
@@ -25,6 +26,7 @@ var Api = (function() {
         Api.bindEvent();
         if (location.hash) { M.anchorHandle(location.hash) }
     };
+
     /* 解决锚点定位不准确的问题 */
     M.anchorHandle = function(hash) {
         var target = decodeURIComponent(hash);

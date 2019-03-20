@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="tinyblog" content="v1.2">
-    <title>eastzq的笔记本</title>
+    <title>朝花夕拾</title>
     <!-- jquery -->
     <script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
     <!-- bootstrap -->
@@ -44,15 +44,21 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="nav-button" data-toggle="collapse" id="btnNav1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="fa fa-sort-amount-asc fa-lg"></span>
-                </button>
-                <button type="button" class="nav-button" data-toggle="collapse" id="btnNav2">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="fa fa-pagelines fa-lg"></span>
-                </button>
-                <a class="navbar-brand" href="#" id="header">BlogName</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" id="btnNav">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                <a class="navbar-brand" href="#" id="header">note</a>
+            </div>
+            <div class="btn-toggle-container">
+                <button type="button" class="btn btn-default" id="btnNav1">
+                        <i class="fa fa-sort-amount-asc fa-lg"></i>
+                    </button>
+                <button type="button" class="btn btn-default" id="btnNav2">
+                        <i class="fa fa-tree fa-lg"></i>
+                    </button>
             </div>
         </div>
         <!-- /.container -->
@@ -60,11 +66,11 @@
 
     <div class="container-fluid main">
         <div class="row">
-            <div class="col-sm-2 col-md-2 sidebar ">
+            <div class="col-sm-4 col-md-2 sidebar ">
                 <div id="blogTree" class="ztree"></div>
             </div>
 
-            <div class="col-sm-7 col-sm-offset-2 col-md-8 col-md-offset-2 markdwon-content">
+            <div class="col-sm-12 col-md-8 col-md-offset-2 markdwon-content">
                 <!--正文-->
                 <h1 class="page-header" id="title"></h1>
                 <div id="article"></div>
@@ -82,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3 col-md-2 md-toc-container" id="md_toc_container"></div>
+            <div class="col-sm-4 col-md-2 md-toc-container" id="md_toc_container"></div>
         </div>
     </div>
 
