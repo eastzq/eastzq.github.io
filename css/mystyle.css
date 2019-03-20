@@ -14,7 +14,7 @@
     padding: 20px;
     display: none;
     border-left: 1px solid #eee;
-    background-color: #fff;
+    background-color: #f2f2f2;
     position: fixed;
     top: 45px;
     right: 0;
@@ -41,7 +41,7 @@
     padding: 10px;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: #fff;
+    background-color: #f2f2f2;
     /* Scrollable contents if viewport is shorter than content. */
     border-right: 1px solid #eee;
 }

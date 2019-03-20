@@ -24,6 +24,7 @@ var Api = (function() {
         var tid = Api.getUrlParams("tid");
         Api.renderAboutMe(tid);
         Api.bindEvent();
+        $("#article").css("min-height", window.innerHeight - 150 + "px");
         if (location.hash) { M.anchorHandle(location.hash) }
     };
 
