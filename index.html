@@ -20,7 +20,8 @@
     <link href="//cdn.bootcss.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- ztree -->
     <link href="https://cdn.bootcss.com/zTree.v3/3.5.40/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/zTree.v3/3.5.40/js/jquery.ztree.all.js"></script>
+    <script src="./lib/ztree/jquery.ztree.core.js"></script>
+    <script src="./lib/ztree/jquery.ztree.exhide.js"></script>
 
     <!--markdown-->
     <link rel="stylesheet" href="./lib/editor.md/css/editormd.preview.min.css" />
@@ -66,6 +67,9 @@
     <div class="container-fluid main">
         <div class="row">
             <div class="col-sm-4 col-md-2 sidebar ">
+                <div class="input-group">
+                    <input type="text" id="key-word" class="form-control"><span class="input-group-addon btn btn-default">搜索</span>
+                </div>
                 <div id="blogTree" class="ztree"></div>
             </div>
 
