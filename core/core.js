@@ -268,8 +268,8 @@ var Api = (function() {
         var node = {
             blogUrl: gh.readmeURL,
             blogPath: "/blog/aboutme/",
-            name: "博客介绍",
-            type: "file"
+            type: "file",
+            fileName: "abountme.md"
         };
         if (tid) {
             var arr = tid.split("/");
