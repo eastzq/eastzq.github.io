@@ -210,7 +210,6 @@ var Api = (function() {
         if (node.type !== "file") {
             return;
         }
-        debugger;
         var blogUrl = node.blogUrl;
         var blogPath = node.blogPath;
         var blogName = node.fileName;
