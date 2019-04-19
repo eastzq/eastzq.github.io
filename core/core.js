@@ -274,6 +274,7 @@ var Api = (function() {
             var arr = tid.split("/");
             var fileName = arr[arr.length - 1];
             node.name = fileName;
+            node.fileName = fileName;
             node.type = 'file';
             node.blogPath =
                 "/" + tid.substring(0, tid.lastIndexOf("/") + 1);
