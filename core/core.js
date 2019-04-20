@@ -13,7 +13,7 @@ var gh = {
 var Api = (function() {
     var M = function() {};
     M.init = function() {
-        $("#header").text(gh.username + "'s notebook");
+        $("#header").text(gh.username + "'s blog");
         $("#commentsList").removeAttr("data_comments_url");
         $("#tips").html(
             '我们不会获取您的用户名和密码,评论直接通过 HTTPS 与 Github API交互,<br>如果您开启了两步验证,请在博客的<a  target="_blank" href="' +
@@ -48,6 +48,19 @@ var Api = (function() {
         $('#btnNav1').on('click', function() {
             $(".md-toc-container").toggle(200);
         });
+        //绑定搜索事件
+        $("#clearKeyword").on("click", function() {
+            $("#key-word").val("");
+            $("#key-word").trigger("input");
+        })
+        $(document).on("keydown", function(e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode == 9) {
+                e.preventDefault();
+                $("#key-word").focus();
+            }
+        });
+
     }
     M.getUrlParams = function(variable) {
         var search = window.location.search;
@@ -339,7 +352,7 @@ var Api = (function() {
                         node[nameKey] = node.oldname.replace(rexGlobal, function(originalText) {
                             //将所有匹配的子串加上高亮效果
                             var highLightText =
-                                '<span style="color: whitesmoke;background-color: darkred;">' +
+                                '<span style="color: whitesmoke;background-color: #3399ea;">' +
                                 originalText +
                                 '</span>';
                             return highLightText;
@@ -404,7 +417,7 @@ var Api = (function() {
         }
 
         //监听关键字input输入框文字变化事件
-        $(searchField).bind('input propertychange', function() {
+        $(searchField).on('input propertychange', function() {
             var _keywords = $(this).val().trim();
             searchNodeLazy(_keywords); //调用延时处理
         });
@@ -423,9 +436,10 @@ var Api = (function() {
     }
     return M;
 })();
+
+
 $(document).ready(function() {
     var main = Api.init();
-    console.log(main);
 });
 
 function setCommentURL(issuesList, blogName) {

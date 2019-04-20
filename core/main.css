@@ -2,9 +2,6 @@
     display: none;
 }
 
-
-/* 解决锚点定位和fixed冲突的问题，锚点和内边距有关，和外边距无关 */
-
 .markdwon-content {
     padding-top: 20px;
     background-color: #fff;
@@ -22,15 +19,6 @@
     bottom: 0;
 }
 
-@media (min-width: 992px) {
-    .md-toc-container {
-        display: block;
-    }
-}
-
-
-/* Hide for mobile, show later */
-
 .sidebar {
     position: fixed;
     top: 45px;
@@ -38,31 +26,12 @@
     left: 0;
     z-index: 1000;
     display: none;
-    padding: 10px;
+    padding: 20px;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #f2f2f2;
     /* Scrollable contents if viewport is shorter than content. */
     border-right: 1px solid #eee;
-}
-
-@media (min-width: 992px) {
-    .sidebar {
-        display: block;
-    }
-}
-
-.nav-button {
-    position: relative;
-    float: right;
-    padding: 9px 10px;
-    margin-top: 8px;
-    margin-right: 15px;
-    margin-bottom: 8px;
-    background-color: transparent;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
 }
 
 .btn-toggle-container {
@@ -77,9 +46,37 @@
 }
 
 @media (min-width: 992px) {
+    .sidebar {
+        display: block;
+    }
+    .md-toc-container {
+        display: block;
+    }
     .btn-toggle-container {
         right: 18%;
     }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        width: 50%;
+    }
+    .md-toc-container {
+        width: 50%;
+    }
+}
+
+.nav-button {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 
 
