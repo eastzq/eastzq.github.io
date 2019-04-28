@@ -4,8 +4,8 @@ var gh = {
     username: "eastzq",
     issuesList: "https://api.github.com/repos/eastzq/eastzq.github.io/issues",
     issuesHTML: "https://github.com/eastzq/eastzq.github.io/issues",
-    readmeURL: "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/blog/ABOUT/About Me.md",
-    baseBlogUrl: "https://raw.githubusercontent.com/eastzq/eastzq.github.io/master/",
+    readmeURL: "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/ABOUT/About Me.md",
+    baseBlogUrl: "https://api.github.com/repos/eastzq/eastzq.github.io/contents/",
     treeUrl: "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/master?recursive=1",
     cache: {}
 };
@@ -252,6 +252,9 @@ var Api = (function() {
                 dataType: "text",
                 url: blogUrl,
                 async: sync ? false : true,
+                headers: {
+                    'Accept': 'application/vnd.github.VERSION.raw'
+                },
                 success: function(result) {
                     //替换markdown里的图片的路径
                     var patten = /\(([^\)])*?\.(jpg|gif|png)\)/gi;
