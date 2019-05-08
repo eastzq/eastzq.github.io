@@ -102,6 +102,9 @@
     font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif;
 }
 
+#md_toc_container ul{
+    padding-left: 20px;
+}
 
 /*
  * Placeholder dashboard ideas
