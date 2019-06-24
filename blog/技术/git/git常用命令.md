@@ -16,6 +16,7 @@ git config --global alias.co checkout  # 别名
 git config --global alias.ci commit
 git config --global alias.st status
 git config --global alias.br branch
+git config --global alias.unstage 'reset HEAD --' #取消暂存！
 git config --global core.editor "vim"  # 设置Editor使用vim
 git config --global core.quotepath false # 设置显示中文文件名
 ```
