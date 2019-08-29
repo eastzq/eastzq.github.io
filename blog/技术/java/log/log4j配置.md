@@ -49,3 +49,6 @@ public static final Logger logger = LoggerFactory.getLogger(ResultModelParser.cl
 
 logger.info("now {}" , "starting server");
 ```
+
+#### 1.5. 日志打印过滤图解
+![log继承图](log继承图.png)
