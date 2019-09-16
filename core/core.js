@@ -254,7 +254,7 @@ var Api = (function() {
                 repo: 'blogComment',
                 owner: 'eastzq',
                 admin: ['eastzq'],
-                labels:[hash],
+                labels:[],
                 id:hash,      // Ensure uniqueness and length less than 50
                 distractionFreeMode: false  // Facebook-like distraction free mode
               })
