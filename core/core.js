@@ -252,7 +252,7 @@ var Api = (function() {
                 repo: 'blogComment',
                 owner: 'eastzq',
                 admin: ['eastzq'],
-                id: tid,      // Ensure uniqueness and length less than 50
+                id:md5(tid),      // Ensure uniqueness and length less than 50
                 distractionFreeMode: false  // Facebook-like distraction free mode
               })
               gitalk.render('comments');
