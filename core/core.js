@@ -243,6 +243,7 @@ var Api = (function() {
                 flowChart: true, // 默认不解析
                 sequenceDiagram: true // 默认不解析
             });
+            $("title").html(tid);
             renderBlogCommnet();
         }
         var renderBlogCommnet = function(){
