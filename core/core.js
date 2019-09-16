@@ -243,7 +243,22 @@ var Api = (function() {
                 flowChart: true, // 默认不解析
                 sequenceDiagram: true // 默认不解析
             });
+            renderBlogCommnet();
         }
+        var renderBlogCommnet = function(){
+            var gitalk = new Gitalk({
+                clientID: 'bd98ae7094366c0c7473',
+                clientSecret: '238af78bbd953bd880d286ea5deef43f84c91638',
+                repo: 'blogComment',
+                owner: 'eastzq',
+                admin: ['eastzq'],
+                id: tid,      // Ensure uniqueness and length less than 50
+                distractionFreeMode: false  // Facebook-like distraction free mode
+              })
+              gitalk.render('comments');
+        }
+
+
         if (gh.cache[blogUrl]) {
             renderMd(gh.cache[blogUrl]);
         } else {
