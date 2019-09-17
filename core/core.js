@@ -243,10 +243,12 @@ var Api = (function() {
                 flowChart: true, // 默认不解析
                 sequenceDiagram: true // 默认不解析
             });
-            $("title").html(tid);
+            
             renderBlogCommnet();
         }
         var renderBlogCommnet = function(){
+            $("#comment").remove();
+            $(".markdwon-content").append('<div class="comments-container" id="comments"></div>');
             var hash = md5(tid);
             var gitalk = new Gitalk({
                 clientID: 'bd98ae7094366c0c7473',
