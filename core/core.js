@@ -17,6 +17,7 @@ var gh = {
 var Api = (function() {
     var M = function() {};
     M.init = function() {
+        $("#header").text(gh.username + "'s blog");
         Api.genBlogTree2(gh.treeUrl);
         var tid = Api.getUrlParams("tid");
         Api.renderArticle(tid);
@@ -288,7 +289,8 @@ var Api = (function() {
                 }
             });
         }
-
+        var stateObject = {};	
+        history.pushState(stateObject, '', '?tid=' + encodeURIComponent(tid));
         //get comments_url
         // setCommentURL(issuesList, blogName);
     };
