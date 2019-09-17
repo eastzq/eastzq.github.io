@@ -191,6 +191,8 @@ var Api = (function() {
 
     M.renderBlogTree = function(blogTreeSelector, data) {
         var onClick = function(event, treeId, treeNode) {
+            var stateObject = {};	
+            history.pushState(stateObject, '', '?tid=' + encodeURIComponent(treeNode.tid));
             M.renderBlogTxt(treeNode);
         };
         var setting = {
@@ -241,8 +243,6 @@ var Api = (function() {
                 flowChart: true, // 默认不解析
                 sequenceDiagram: true // 默认不解析
             });
-            var stateObject = {};	
-            history.pushState(stateObject, '', '?tid=' + encodeURIComponent(tid));
             renderBlogCommnet();
         }
         var renderBlogCommnet = function(){
