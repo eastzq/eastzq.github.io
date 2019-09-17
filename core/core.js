@@ -241,7 +241,8 @@ var Api = (function() {
                 flowChart: true, // 默认不解析
                 sequenceDiagram: true // 默认不解析
             });
-            
+            var stateObject = {};	
+            history.pushState(stateObject, '', '?tid=' + encodeURIComponent(tid));
             renderBlogCommnet();
         }
         var renderBlogCommnet = function(){
@@ -289,8 +290,6 @@ var Api = (function() {
                 }
             });
         }
-        var stateObject = {};	
-        history.pushState(stateObject, '', '?tid=' + encodeURIComponent(tid));
         //get comments_url
         // setCommentURL(issuesList, blogName);
     };
