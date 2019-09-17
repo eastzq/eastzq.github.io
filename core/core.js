@@ -1,15 +1,19 @@
-var issuesList;
-var issuesHTML;
+/**
+ * 全局参数
+ */
 var gh = {
-    username: "eastzq",
-    issuesList: "https://api.github.com/repos/eastzq/eastzq.github.io/issues",
-    issuesHTML: "https://github.com/eastzq/eastzq.github.io/issues",
-    readmeURL: "https://api.github.com/repos/eastzq/eastzq.github.io/contents/blog/ABOUT/About Me.md",
-    baseBlogUrl: "https://api.github.com/repos/eastzq/eastzq.github.io/contents/",
-    treeUrl: "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/master?recursive=1",
-    cache: {}
+    username: "eastzq", //pages用户名
+    baseBlogUrl: "https://api.github.com/repos/eastzq/eastzq.github.io/contents/",//博客内容地址
+    readmeTid: "blog/ABOUT/About Me.md",//个人主页标识
+    treeUrl: "https://api.github.com/repos/eastzq/eastzq.github.io/git/trees/master?recursive=1",//所有文件地址
+    cache: {},//文件缓存
+    clientID:"bd98ae7094366c0c7473",//gitalk专用 用户自定义授权app参数
+    clientSecret:"238af78bbd953bd880d286ea5deef43f84c91638",//gitalk专用 用户自定义授权app参数
+    commentRepo:"blogComment"//评论所在仓库
 };
-
+/**
+ * api接口
+ */
 var Api = (function() {
     var M = function() {};
     M.init = function() {
@@ -244,11 +248,11 @@ var Api = (function() {
             $(".markdwon-content").append('<div class="comments-container" id="comments"></div>');
             var hash = md5(tid);
             var gitalk = new Gitalk({
-                clientID: 'bd98ae7094366c0c7473',
-                clientSecret: '238af78bbd953bd880d286ea5deef43f84c91638',
-                repo: 'blogComment',
-                owner: 'eastzq',
-                admin: ['eastzq'],
+                clientID: gh.clientID,
+                clientSecret: gh.clientSecret,
+                repo: gh.commentRepo,
+                owner: gh.username,
+                admin: [gh.username],
                 labels:[],
                 id:hash,      // Ensure uniqueness and length less than 50
                 distractionFreeMode: false  // Facebook-like distraction free mode
@@ -290,11 +294,11 @@ var Api = (function() {
     };
     M.renderArticle = function(tid) {
         var node = {
-            blogUrl: gh.readmeURL,
+            blogUrl: gh.baseBlogUrl+gh.readmeTid,
             blogPath: "/blog/aboutme/",
             type: "file",
             fileName: "个人介绍",
-            tid:"blog/ABOUT/About Me.md"
+            tid:gh.readmeTid
         };
         if (tid) {
             var arr = tid.split("/");
