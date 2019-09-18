@@ -256,6 +256,7 @@ var Api = (function() {
                 owner: gh.username,
                 admin: [gh.username],
                 labels:[],
+                title:tid,
                 id:hash,      // Ensure uniqueness and length less than 50
                 distractionFreeMode: false  // Facebook-like distraction free mode
               })
