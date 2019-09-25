@@ -1,4 +1,6 @@
 ## OLAP 简介
+http://www.huqiwen.com/2012/06/15/olap-abstruct-and-mondrian-quick-start/
+
 OLAP（On-Line Analysis Processing）在线分析处理是一种共享多维信息的快速分析技术；OLAP利用多维数据库技术使用户从不同角度观察数据；OLAP用于支持复杂的分析操作，侧重于对管理人员的决策支持，可以满足分析人员快速、灵活地进行大数据复量的复杂查询的要求，并且以一种直观、易懂的形式呈现查询结果，辅助决策。
 ![示例图](assets/olap图1.png)
 
