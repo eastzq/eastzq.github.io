@@ -37,6 +37,7 @@ git co  .           # 抛弃工作区修改
 
 git add <file>      # 将工作文件修改提交到本地暂存区
 git add .           # 将所有修改过的工作文件提交暂存区
+git add -u          # 只将已跟踪的文件添加，不添加新文件
 
 git rm <file>       # 从版本库中删除文件
 git rm <file> --cached  # 从版本库中删除文件，但不删除文件
