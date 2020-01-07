@@ -1,0 +1,8 @@
+{
+    "username": "eastzq", 
+    "homePage": "blog/ABOUT/About Me.md",
+    "isCommentOn":true,
+    "clientID":"bd98ae7094366c0c7473",
+    "clientSecret":"238af78bbd953bd880d286ea5deef43f84c91638",
+    "commentRepo":"blogComment"
+}
