@@ -23,7 +23,7 @@ var Api = (function () {
         var tid = Api.getUrlParams("tid");
         Api.renderArticle(tid);
         Api.bindEvent();
-        $("#article").css("min-height", window.innerHeight - 150 + "px");
+        $("#article").css("min-height",450 + "px");
         if (location.hash) { M.anchorHandle(location.hash) }
     };
 
