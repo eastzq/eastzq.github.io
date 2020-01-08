@@ -195,6 +195,7 @@ var Api = (function () {
             var stateObject = {};
             history.pushState(stateObject, '', '?tid=' + encodeURIComponent(treeNode.tid));
             M.renderBlogTxt(treeNode);
+            M.adjustTreeWidth();
         };
         var setting = {
             callback: {
@@ -208,6 +209,8 @@ var Api = (function () {
         }
         M.fuzzySearch('blogTree', '#key-word', null, false);
     };
+    M.adjustTreeWidth = function(){
+    }
     M.findObjInArrayByName = function (arr, name) {
         for (var i = 0; i < arr.length; i++) {
             if (arr[i].name === name) {

@@ -13,6 +13,7 @@
     right: 0;
     z-index: 1000;
     bottom: 0;
+    width: 16.666666%;
 }
 
 .markdwon-content .markdown-body{
@@ -27,11 +28,11 @@
     z-index: 1000;
     display: none;
     padding: 20px;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: auto !important;
     background-color: #f2f2f2;
     /* Scrollable contents if viewport is shorter than content. */
     border-right: 1px solid #eee;
+    width: 16.666666%;
 }
 
 .btn-toggle-container {
@@ -59,12 +60,22 @@
 
 @media (max-width: 992px) {
     .sidebar {
-        width: 50%;
+        width: 30%;
     }
     .md-toc-container {
-        width: 50%;
+        width: 30%;
     }
 }
+
+@media (max-width: 600px) {
+    .sidebar {
+        width: 40%;
+    }
+    .md-toc-container {
+        width: 40%;
+    }
+}
+
 
 .nav-button {
     position: relative;
@@ -101,6 +112,10 @@
     font-size: 13px;
     font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif;
 }
+.ztree ul {
+    overflow: unset !important;
+}
+
 
 #md_toc_container ul{
     padding-left: 20px;
