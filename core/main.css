@@ -34,6 +34,9 @@
     border-right: 1px solid #eee;
     width: 16.666666%;
 }
+.sidebar .search-box{
+    min-width: 180px;
+}
 
 .btn-toggle-container {
     color: #5e9cd1;
@@ -98,7 +101,7 @@
 .main {
     padding-right: 20px;
     padding-left: 20px;
-    padding-top: 50px;
+    padding-top: 40px;
     background-color: #f2f2f2;
 }
 
