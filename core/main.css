@@ -72,10 +72,10 @@
 
 @media (max-width: 600px) {
     .sidebar {
-        width: 50%;
+        width: 55%;
     }
     .md-toc-container {
-        width: 50%;
+        width: 40%;
     }
 }
 
