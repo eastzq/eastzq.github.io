@@ -10,7 +10,7 @@ var gh = {
     clientID: "bd98ae7094366c0c7473",//gitalk专用 用户自定义授权app参数
     clientSecret: "238af78bbd953bd880d286ea5deef43f84c91638",//gitalk专用 用户自定义授权app参数
     commentRepo: "blogComment",//评论所在仓库
-    isCommentOn:true // 是否开启评论功能，需要配置[clientID][clientSecret][commentRepo]三项属性。也是gitalk专用属性，需要新建个github app，详见gitalk文档 https://github.com/gitalk/gitalk/blob/master/readme-cn.md
+    isCommentOn: true // 是否开启评论功能，需要配置[clientID][clientSecret][commentRepo]三项属性。也是gitalk专用属性，需要新建个github app，详见gitalk文档 https://github.com/gitalk/gitalk/blob/master/readme-cn.md
 };
 /**
  * api接口
@@ -23,7 +23,7 @@ var Api = (function () {
         var tid = Api.getUrlParams("tid");
         Api.renderArticle(tid);
         Api.bindEvent();
-        $("#article").css("min-height",450 + "px");
+        $("#article").css("min-height", 450 + "px");
         if (location.hash) { M.anchorHandle(location.hash) }
     };
 
@@ -52,6 +52,9 @@ var Api = (function () {
             $("#key-word").val("");
             $("#key-word").trigger("input");
         })
+        $(window).resize(function () {
+            $(".md-toc-container,.sidebar").css("display","");
+        });
         $(document).on("keydown", function (e) {
             var keyCode = e.keyCode || e.which;
             if (keyCode == 9) {
@@ -209,7 +212,7 @@ var Api = (function () {
         }
         M.fuzzySearch('blogTree', '#key-word', null, false);
     };
-    M.adjustTreeWidth = function(){
+    M.adjustTreeWidth = function () {
     }
     M.findObjInArrayByName = function (arr, name) {
         for (var i = 0; i < arr.length; i++) {
@@ -250,7 +253,7 @@ var Api = (function () {
             renderBlogCommnet();
         }
         var renderBlogCommnet = function () {
-            if(gh.isCommentOn==false){
+            if (gh.isCommentOn == false) {
                 return;
             }
             $("#comments").remove();
@@ -476,20 +479,20 @@ $(document).ready(function () {
     }
     $.ajax({
         dataType: "json",
-        url: getRootPath()+"/config.json",
+        url: getRootPath() + "/config.json",
         success: function (result) {
             var username = result.username;
-            for(var key in gh){
+            for (var key in gh) {
                 var value = gh[key];
-                if(value){
+                if (value) {
                     gh[key] = value.toString().replace(/\${.*?}/g, username);
                 }
             }
-            gh.readmeTid=result.homePage;
-            gh.isCommentOn=result.isCommentOn;
-            gh.clientID=result.clientID;
-            gh.clientSecret=result.clientSecret;
-            gh.commentRepo=result.commentRepo;
+            gh.readmeTid = result.homePage;
+            gh.isCommentOn = result.isCommentOn;
+            gh.clientID = result.clientID;
+            gh.clientSecret = result.clientSecret;
+            gh.commentRepo = result.commentRepo;
             var main = Api.init();
         }
     });
