@@ -24,6 +24,7 @@ var Api = (function () {
         Api.renderArticle(tid);
         Api.bindEvent();
         $("#article").css("min-height", 450 + "px");
+        $(".markdwon-content").css("min-height",$(window).height()-60);
         if (location.hash) { M.anchorHandle(location.hash) }
     };
 
