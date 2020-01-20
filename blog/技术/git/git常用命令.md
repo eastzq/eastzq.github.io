@@ -173,3 +173,14 @@ git branch --set-upstream master origin/master
 git branch --set-upstream develop origin/develop
 
 ```
+
+#### 创建标签
+
+```shell
+git tag -a v1.4 -m "my version 1.4" # 创建带有附加信息的标签
+git tag                             # 列出所有标签
+git show v1.4                       # 查看具体标签
+git push origin v1.4                # 推送标签到远程仓库
+git tag -d v1.4                     # 删除本地标签
+git push origin :refs/tags/v1.4     # 删除远程标签
+```
