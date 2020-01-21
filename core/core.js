@@ -18,6 +18,7 @@ var gh = {
 var Api = (function () {
     var M = function () { };
     M.init = function () {
+        gh.winWidth=$(window).width();
         $("#header").text(gh.username + "'s blog");
         Api.genBlogTree2(gh.treeUrl);
         var tid = Api.getUrlParams("tid");
@@ -26,7 +27,6 @@ var Api = (function () {
         $("#article").css("min-height", 450 + "px");
         $(".markdwon-content").css("min-height",$(window).height()-60);
         if (location.hash) { M.anchorHandle(location.hash) }
-        gh.winWidth=$(window).width();
     };
 
     /* 解决锚点定位不准确的问题 */
@@ -43,22 +43,40 @@ var Api = (function () {
         $('#md_toc_container').on('click', 'a', function () {
             M.anchorHandle(this.hash)
         });
-        $('#btnNav2').on('click', function () {
+        $('#btnNav2').on('click', function (e) {
             $(".sidebar").toggle(200);
+            e.stopPropagation();
         });
-        $('#btnNav1').on('click', function () {
+        $('#btnNav1').on('click', function (e) {
             $(".md-toc-container").toggle(200);
+            e.stopPropagation();
         });
         //绑定搜索事件
         $("#clearKeyword").on("click", function () {
             $("#key-word").val("");
             $("#key-word").trigger("input");
         })
+        if(gh.winWidth<992){
+            $(document).off("click").on("click",function(){
+                $(".md-toc-container,.sidebar").hide(200);
+            })
+            $(".md-toc-container,.sidebar").off("click").on("click",function(e){
+                e.stopPropagation();
+            })
+        }
         $(window).resize(function () {
             var curWidth = $(window).width();
             if((curWidth-992)*(gh.winWidth-992)<=0){
                 gh.winWidth=curWidth;
                 $(".md-toc-container,.sidebar").css("display","");
+                if(gh.winWidth<992){
+                    $(document).off("click").on("click",function(){
+                        $(".md-toc-container,.sidebar").hide();
+                    })
+                    $(".md-toc-container,.sidebar").off("click").on("click",function(e){
+                        e.stopPropagation();
+                    })
+                }
             }
         });
         $(document).on("keydown", function (e) {
