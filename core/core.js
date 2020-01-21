@@ -71,11 +71,13 @@ var Api = (function () {
                 $(".md-toc-container,.sidebar").css("display","");
                 if(gh.winWidth<992){
                     $(document).off("click").on("click",function(){
-                        $(".md-toc-container,.sidebar").hide();
+                        $(".md-toc-container,.sidebar").hide(200);
                     })
                     $(".md-toc-container,.sidebar").off("click").on("click",function(e){
                         e.stopPropagation();
                     })
+                }else{
+                    $(document).off("click");
                 }
             }
         });
