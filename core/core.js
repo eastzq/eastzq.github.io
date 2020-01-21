@@ -26,6 +26,7 @@ var Api = (function () {
         $("#article").css("min-height", 450 + "px");
         $(".markdwon-content").css("min-height",$(window).height()-60);
         if (location.hash) { M.anchorHandle(location.hash) }
+        gh.winWidth=$(window).width();
     };
 
     /* 解决锚点定位不准确的问题 */
@@ -54,7 +55,11 @@ var Api = (function () {
             $("#key-word").trigger("input");
         })
         $(window).resize(function () {
-            $(".md-toc-container,.sidebar").css("display","");
+            var curWidth = $(window).width();
+            if((curWidth-992)*(gh.winWidth-992)<=0){
+                gh.winWidth=curWidth;
+                $(".md-toc-container,.sidebar").css("display","");
+            }
         });
         $(document).on("keydown", function (e) {
             var keyCode = e.keyCode || e.which;
