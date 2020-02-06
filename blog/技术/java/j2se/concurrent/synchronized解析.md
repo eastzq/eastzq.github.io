@@ -1,6 +1,6 @@
 ## sychronized 关键字
 引用 http://www.pianshen.com/article/13827882/
-#### java对象头
+### java对象头
 锁的实现机制与java对象头息息相关，锁的所有信息，都记录在java的对象头中。用2字（32位JVM中1字=32bit=4baye）存储对象头，如果是数组类型使用3字存储（还需存储数组长度）。对象头中记录了hash值、GC年龄、锁的状态、线程拥有者、类元数据的指针。
 
 ![](assets/markword.png)
