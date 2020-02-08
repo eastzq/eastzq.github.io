@@ -110,8 +110,12 @@ var Api = (function () {
 
     M.authorizeUrl=function(url){
         if(gh.clientSecret && gh.clientID){
-            var suffix = "?client_id="+gh.clientID+"&client_secret="+gh.clientSecret;
-            return url+suffix;
+            var suffix = "client_id="+gh.clientID+"&client_secret="+gh.clientSecret;
+            if(url.indexOf("?")<0){
+                return url+"?"+suffix;
+            }else{
+                return url+"&"+suffix;
+            }
         }
     }
     //@deprecated
