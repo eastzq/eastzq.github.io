@@ -116,6 +116,8 @@ var Api = (function () {
             }else{
                 return url+"&"+suffix;
             }
+        }else{
+            return url;
         }
     }
     //@deprecated
