@@ -20,10 +20,10 @@ var Api = (function () {
     M.init = function () {
         gh.winWidth=$(window).width();
         $("#header").text(gh.username + "'s blog");
-        Api.genBlogTree2(gh.treeUrl);
-        var tid = Api.getUrlParams("tid");
-        Api.renderArticle(tid);
-        Api.bindEvent();
+        M.genBlogTree2(gh.treeUrl);
+        var tid = M.getUrlParams("tid");
+        M.renderArticle(tid);
+        M.bindEvent();
         $("#article").css("min-height", 450 + "px");
         $(".markdwon-content").css("min-height",$(window).height()-60);
         if (location.hash) { M.anchorHandle(location.hash) }
@@ -108,6 +108,13 @@ var Api = (function () {
         return false;
     }
 
+    M.authorizeUrl=function(url){
+        if(gh.clientSecret && gh.clientID){
+            var suffix = "?client_id="+gh.clientID+"&client_secret="+gh.clientSecret;
+            return url+suffix;
+        }
+    }
+    //@deprecated
     //递归生成博客树 效率低，但是目前文件较少，以后可以改成懒加载。
     // github api有限制访问频率，所以递归容易产生太多请求，不合适。
     M.genBlogTree = function (contentUrl) {
@@ -155,7 +162,7 @@ var Api = (function () {
         var blogTree = [];
         $.ajax({
             dataType: "json",
-            url: treeUrl,
+            url: M.authorizeUrl(treeUrl),
             async: true,
             success: function (json) {
                 for (var i = 0; i < json.tree.length; i++) {
@@ -183,7 +190,7 @@ var Api = (function () {
                         node.tid = path;
                         node.blogPath =
                             "/" + path.substring(0, path.lastIndexOf("/") + 1);
-                        node.blogUrl = gh.baseBlogUrl + path;
+                        node.blogUrl =M.authorizeUrl(gh.baseBlogUrl + path);
                         var pArr = blogTree;
                         for (var j = 0; j < arr.length - 1; j++) {
                             var temp = arr[j];
