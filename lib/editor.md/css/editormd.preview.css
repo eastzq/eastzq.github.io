@@ -3338,10 +3338,10 @@ li.L9 {
 }
 .editormd-preview-container ol.linenums, .editormd-html-preview ol.linenums {
   color: #999;
-  padding-left: 2.5em;
+  padding-left: 0.5em;
 }
 .editormd-preview-container ol.linenums li, .editormd-html-preview ol.linenums li {
-  list-style-type: decimal;
+  list-style-type: none;
 }
 .editormd-preview-container ol.linenums li code, .editormd-html-preview ol.linenums li code {
   border: none;
@@ -3551,4 +3551,13 @@ hr.editormd-page-break {
 .editormd-preview-active {
   width: 100%;
   padding: 40px;
+}
+
+.markdown-body>p{
+  text-indent: 2em;
+}
+.markdown-body blockquote{
+  padding: 0 1em;
+  color: #696e74;
+  border:0px;
 }
