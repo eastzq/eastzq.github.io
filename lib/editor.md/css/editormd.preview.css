@@ -3544,6 +3544,7 @@ hr.editormd-page-break {
   transition: background-color 300ms ease-out;
   /* IE >9, FF >15, Opera >12.0 */
 }
+
 .editormd-preview-close-btn:hover {
   background-color: #999;
 }
@@ -3557,8 +3558,9 @@ hr.editormd-page-break {
   text-indent: 2em;
 }
 
-.markdown-body blockquote{
+.markdown-body blockquote {
   padding: 0 1em;
-  color: #696e74;
-  border:0px;
+  color: #006bc7;
+  border: 0px;
+  font-style: normal;
 }
