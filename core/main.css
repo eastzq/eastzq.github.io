@@ -4,7 +4,7 @@
 }
 
 .md-toc-container {
-    padding: 20px;
+    padding: 20px 10px;
     display: none;
     border-left: 1px solid #eee;
     background-color: #f2f2f2;
@@ -16,8 +16,8 @@
     width: 16.666666%;
 }
 
-.markdwon-content .markdown-body{
-    font-size: 14px !important;
+#article.markdown-body {
+    font-size: 14px;
 }
 
 .sidebar {
@@ -34,7 +34,8 @@
     border-right: 1px solid #eee;
     width: 16.666666%;
 }
-.sidebar .search-box{
+
+.sidebar .search-box {
     min-width: 180px;
 }
 
@@ -79,7 +80,6 @@
     }
 }
 
-
 .nav-button {
     position: relative;
     float: right;
@@ -115,14 +115,11 @@
     font-size: 13px;
     font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif;
 }
+
 .ztree ul {
     overflow: unset !important;
 }
 
-
-#md_toc_container ul{
-    padding-left: 20px;
-}
 
 /*
  * Placeholder dashboard ideas
@@ -170,7 +167,7 @@
     border-color: #ddd;
 }
 
-.comments-container{
+.comments-container {
     margin-top: 20px;
     padding: 10px;
     margin-bottom: 40px;
