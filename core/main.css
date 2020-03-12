@@ -175,6 +175,7 @@
 #article.markdown-body {
     font-size: 15px;
     line-height: 1.8;
+    letter-spacing: 0.2px;
 }
 
 #md_toc_container ul li {
