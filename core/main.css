@@ -16,9 +16,6 @@
     width: 16.666666%;
 }
 
-#article.markdown-body {
-    font-size: 14px;
-}
 
 .sidebar {
     position: fixed;
@@ -112,8 +109,6 @@
 .ztree * {
     padding: 0;
     margin: 0;
-    font-size: 13px;
-    font-family: Verdana, Arial, Helvetica, AppleGothic, sans-serif;
 }
 
 .ztree ul {
@@ -175,4 +170,37 @@
 
 .container-fluid {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+#article.markdown-body {
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+#md_toc_container ul li {
+    list-style-type: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#md_toc_container ul {
+    padding-left: 20px;
+}
+
+#md_toc_container .toc-level-1,
+#md_toc_container .toc-level-2,
+#md_toc_container .toc-level-3,
+#md_toc_container .toc-level-4,
+#md_toc_container .toc-level-5,
+#md_toc_container .toc-level-6 {
+    color: #7e7e7e;
+    line-height: 25px;
+    font-size: 12px;
+}
+
+#md_toc_container .toc-level-1,
+#md_toc_container .toc-level-2{
+    font-size: 13px;
+    font-weight: 550;
 }

@@ -2479,7 +2479,7 @@
     color: #333;
     overflow: hidden;
     font-family: "Microsoft YaHei", Helvetica, "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", "Monaco", monospace, Tahoma, STXihei, "华文细黑", STHeiti, "Helvetica Neue", "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.6;
     word-wrap: break-word;
 }
@@ -3687,30 +3687,3 @@ hr.editormd-page-break {
     text-indent: 2em;
 }
 
-#md_toc_container ul li {
-    list-style-type: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-#md_toc_container ul {
-    padding-left: 20px;
-}
-
-#md_toc_container .toc-level-1,
-#md_toc_container .toc-level-2,
-#md_toc_container .toc-level-3,
-#md_toc_container .toc-level-4,
-#md_toc_container .toc-level-5,
-#md_toc_container .toc-level-6 {
-    color: #7e7e7e;
-    line-height: 25px;
-}
-
-#md_toc_container .toc-level-1,
-#md_toc_container .toc-level-2,
-#md_toc_container .toc-level-3 {
-    font-size: 14px;
-    font-weight: 550;
-}
