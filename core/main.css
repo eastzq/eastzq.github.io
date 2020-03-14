@@ -16,7 +16,6 @@
     width: 16.666666%;
 }
 
-
 .sidebar {
     position: fixed;
     top: 45px;
@@ -102,8 +101,12 @@
     background-color: #f2f2f2;
 }
 
-.main .page-header {
+.main .page-title {
     margin-top: 0;
+}
+
+.navbar .page-header {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .ztree * {
@@ -168,10 +171,6 @@
     margin-bottom: 40px;
 }
 
-.container-fluid {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-}
-
 #article.markdown-body {
     font-size: 15px;
     line-height: 1.8;
@@ -201,7 +200,7 @@
 }
 
 #md_toc_container .toc-level-1,
-#md_toc_container .toc-level-2{
+#md_toc_container .toc-level-2 {
     font-size: 13px;
     font-weight: 550;
 }
