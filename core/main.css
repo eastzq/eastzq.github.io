@@ -102,10 +102,12 @@
 }
 
 .main .page-title {
-    margin-top: 0;
+    padding-bottom: 9px;
+    margin: 20px 0 20px;
+    border-bottom: 1px solid #eee;
 }
 
-.navbar .page-header {
+.navbar .my-page-header {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
