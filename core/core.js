@@ -3,34 +3,34 @@
  */
 var gh = {
     username: "${username}", //pages用户名
-    baseBlogUrl: "https://api.github.com/repos/${username}/${username}.github.io/contents/",//博客内容地址
-    readmeTid: "blog/ABOUT/About Me.md",//个人主页标识
-    treeUrl: "https://api.github.com/repos/${username}/${username}.github.io/git/trees/master?recursive=1",//所有文件地址
-    cache: {},//文件缓存
-    clientID: "bd98ae7094366c0c7473",//gitalk专用 用户自定义授权app参数
-    clientSecret: "238af78bbd953bd880d286ea5deef43f84c91638",//gitalk专用 用户自定义授权app参数
-    commentRepo: "blogComment",//评论所在仓库
+    baseBlogUrl: "https://api.github.com/repos/${username}/${username}.github.io/contents/", //博客内容地址
+    readmeTid: "blog/ABOUT/About Me.md", //个人主页标识
+    treeUrl: "https://api.github.com/repos/${username}/${username}.github.io/git/trees/master?recursive=1", //所有文件地址
+    cache: {}, //文件缓存
+    clientID: "bd98ae7094366c0c7473", //gitalk专用 用户自定义授权app参数
+    clientSecret: "238af78bbd953bd880d286ea5deef43f84c91638", //gitalk专用 用户自定义授权app参数
+    commentRepo: "blogComment", //评论所在仓库
     isCommentOn: true // 是否开启评论功能，需要配置[clientID][clientSecret][commentRepo]三项属性。也是gitalk专用属性，需要新建个github app，详见gitalk文档 https://github.com/gitalk/gitalk/blob/master/readme-cn.md
 };
 /**
  * api接口
  */
-var Api = (function () {
-    var M = function () { };
-    M.init = function () {
-        gh.winWidth=$(window).width();
+var Api = (function() {
+    var M = function() {};
+    M.init = function() {
+        gh.winWidth = $(window).width();
         $("#header").text(gh.username + "'s blog");
         M.genBlogTree2(gh.treeUrl);
         var tid = M.getUrlParams("tid");
         M.renderArticle(tid);
         M.bindEvent();
         $("#article").css("min-height", 450 + "px");
-        $(".markdwon-content").css("min-height",$(window).height()-60);
+        $(".markdwon-content").css("min-height", $(window).height() - 60);
         if (location.hash) { M.anchorHandle(location.hash) }
     };
 
     /* 解决锚点定位不准确的问题 */
-    M.anchorHandle = function (hash) {
+    M.anchorHandle = function(hash) {
         var target = decodeURIComponent(hash);
         var temp = target.substring(1);
         var $t = $("a[name='" + temp + "']");
@@ -39,49 +39,49 @@ var Api = (function () {
         $('html,body').animate({ scrollTop: targetOffset }, 200);
     }
 
-    M.bindEvent = function () {
-        $('#md_toc_container').on('click', 'a', function () {
+    M.bindEvent = function() {
+        $('#md_toc_container').on('click', 'a', function() {
             M.anchorHandle(this.hash)
         });
-        $('#btnNav2').on('click', function (e) {
+        $('#btnNav2').on('click', function(e) {
             $(".sidebar").toggle(200);
             e.stopPropagation();
         });
-        $('#btnNav1').on('click', function (e) {
+        $('#btnNav1').on('click', function(e) {
             $(".md-toc-container").toggle(200);
             e.stopPropagation();
         });
         //绑定搜索事件
-        $("#clearKeyword").on("click", function () {
+        $("#clearKeyword").on("click", function() {
             $("#key-word").val("");
             $("#key-word").trigger("input");
         })
-        if(gh.winWidth<992){
-            $(document).off("click").on("click",function(){
+        if (gh.winWidth < 992) {
+            $(document).off("click").on("click", function() {
                 $(".md-toc-container,.sidebar").hide(200);
             })
-            $(".md-toc-container,.sidebar").off("click").on("click",function(e){
+            $(".md-toc-container,.sidebar").off("click").on("click", function(e) {
                 e.stopPropagation();
             })
         }
-        $(window).resize(function () {
+        $(window).resize(function() {
             var curWidth = $(window).width();
-            if((curWidth-992)*(gh.winWidth-992)<=0){
-                gh.winWidth=curWidth;
-                $(".md-toc-container,.sidebar").css("display","");
-                if(gh.winWidth<992){
-                    $(document).off("click").on("click",function(){
+            if ((curWidth - 992) * (gh.winWidth - 992) <= 0) {
+                gh.winWidth = curWidth;
+                $(".md-toc-container,.sidebar").css("display", "");
+                if (gh.winWidth < 992) {
+                    $(document).off("click").on("click", function() {
                         $(".md-toc-container,.sidebar").hide(200);
                     })
-                    $(".md-toc-container,.sidebar").off("click").on("click",function(e){
+                    $(".md-toc-container,.sidebar").off("click").on("click", function(e) {
                         e.stopPropagation();
                     })
-                }else{
+                } else {
                     $(document).off("click");
                 }
             }
         });
-        $(document).on("keydown", function (e) {
+        $(document).on("keydown", function(e) {
             var keyCode = e.keyCode || e.which;
             if (keyCode == 9) {
                 e.preventDefault();
@@ -90,7 +90,7 @@ var Api = (function () {
         });
 
     }
-    M.getUrlParams = function (variable) {
+    M.getUrlParams = function(variable) {
         var search = window.location.search;
         var query;
         if (search.indexOf("#") === -1) {
@@ -108,28 +108,28 @@ var Api = (function () {
         return false;
     }
 
-    M.authorizeUrl=function(url){
-        if(gh.clientSecret && gh.clientID){
-            var suffix = "client_id="+gh.clientID+"&client_secret="+gh.clientSecret;
-            if(url.indexOf("?")<0){
-                return url+"?"+suffix;
-            }else{
-                return url+"&"+suffix;
+    M.authorizeUrl = function(url) {
+            if (gh.clientSecret && gh.clientID) {
+                var suffix = "client_id=" + gh.clientID + "&client_secret=" + gh.clientSecret;
+                if (url.indexOf("?") < 0) {
+                    return url + "?" + suffix;
+                } else {
+                    return url + "&" + suffix;
+                }
+            } else {
+                return url;
             }
-        }else{
-            return url;
         }
-    }
-    //@deprecated
-    //递归生成博客树 效率低，但是目前文件较少，以后可以改成懒加载。
-    // github api有限制访问频率，所以递归容易产生太多请求，不合适。
-    M.genBlogTree = function (contentUrl) {
+        //@deprecated
+        //递归生成博客树 效率低，但是目前文件较少，以后可以改成懒加载。
+        // github api有限制访问频率，所以递归容易产生太多请求，不合适。
+    M.genBlogTree = function(contentUrl) {
         var blogTree = [];
         $.ajax({
             dataType: "json",
             url: contentUrl,
             async: false,
-            success: function (json) {
+            success: function(json) {
                 for (var i = 0; i < json.length; i++) {
                     var node = {
                         name: ""
@@ -164,13 +164,13 @@ var Api = (function () {
     };
 
     //使用另外一个api来生成文件树。
-    M.genBlogTree2 = function (treeUrl) {
+    M.genBlogTree2 = function(treeUrl) {
         var blogTree = [];
         $.ajax({
             dataType: "json",
             url: M.authorizeUrl(treeUrl),
             async: true,
-            success: function (json) {
+            success: function(json) {
                 for (var i = 0; i < json.tree.length; i++) {
                     var node = {
                         name: ""
@@ -196,7 +196,7 @@ var Api = (function () {
                         node.tid = path;
                         node.blogPath =
                             "/" + path.substring(0, path.lastIndexOf("/") + 1);
-                        node.blogUrl =M.authorizeUrl(gh.baseBlogUrl + path);
+                        node.blogUrl = M.authorizeUrl(gh.baseBlogUrl + path);
                         var pArr = blogTree;
                         for (var j = 0; j < arr.length - 1; j++) {
                             var temp = arr[j];
@@ -224,7 +224,7 @@ var Api = (function () {
         });
     };
 
-    M.isMarkdown = function (fileName) {
+    M.isMarkdown = function(fileName) {
         var index = fileName.lastIndexOf(".");
         //获取后缀
         var ext = fileName.substr(index + 1).toLowerCase();
@@ -232,11 +232,13 @@ var Api = (function () {
         return ext === "md" || ext === "markdown";
     };
 
-    M.renderBlogTree = function (blogTreeSelector, data) {
-        var onClick = function (event, treeId, treeNode) {
-            var stateObject = {};
-            history.pushState(stateObject, '', '?tid=' + encodeURIComponent(treeNode.tid));
-            M.renderBlogTxt(treeNode);
+    M.renderBlogTree = function(blogTreeSelector, data) {
+        var onClick = function(event, treeId, treeNode) {
+            if (treeNode.type != "dir") {
+                var stateObject = {};
+                history.pushState(stateObject, '', '?tid=' + encodeURIComponent(treeNode.tid));
+                M.renderBlogTxt(treeNode);
+            }
             M.adjustTreeWidth();
         };
         var setting = {
@@ -251,9 +253,8 @@ var Api = (function () {
         }
         M.fuzzySearch('blogTree', '#key-word', null, false);
     };
-    M.adjustTreeWidth = function () {
-    }
-    M.findObjInArrayByName = function (arr, name) {
+    M.adjustTreeWidth = function() {}
+    M.findObjInArrayByName = function(arr, name) {
         for (var i = 0; i < arr.length; i++) {
             if (arr[i].name === name) {
                 return arr[i];
@@ -261,7 +262,7 @@ var Api = (function () {
         }
         return false;
     };
-    M.renderBlogTxt = function (node, sync) {
+    M.renderBlogTxt = function(node, sync) {
         // 隐藏Button，响应式布局用。
         if (!$("#btnNav").is(":hidden")) {
             $("#btnNav").click();
@@ -276,7 +277,7 @@ var Api = (function () {
         $("#title").text(blogName);
         $("#article").html("loading . . .");
 
-        var renderMd = function (md) {
+        var renderMd = function(md) {
             $("#article").html("");
             editormd.markdownToHTML("article", {
                 markdown: md, //+ "\r\n" + $("#append-test").text(),
@@ -291,7 +292,7 @@ var Api = (function () {
             });
             renderBlogCommnet();
         }
-        var renderBlogCommnet = function () {
+        var renderBlogCommnet = function() {
             if (gh.isCommentOn == false) {
                 return;
             }
@@ -306,8 +307,8 @@ var Api = (function () {
                 admin: [gh.username],
                 labels: [],
                 title: tid,
-                id: hash,      // Ensure uniqueness and length less than 50
-                distractionFreeMode: false  // Facebook-like distraction free mode
+                id: hash, // Ensure uniqueness and length less than 50
+                distractionFreeMode: false // Facebook-like distraction free mode
             })
             gitalk.render('comments');
         }
@@ -324,10 +325,10 @@ var Api = (function () {
                 headers: {
                     'Accept': 'application/vnd.github.VERSION.raw'
                 },
-                success: function (result) {
+                success: function(result) {
                     //替换markdown里的图片的路径
                     var patten = /\(([^\)])*?\.(jpg|gif|png)\)/gi;
-                    var md = result.replace(patten, function (match) {
+                    var md = result.replace(patten, function(match) {
                         var picPath = match.substring(1, match.lastIndexOf(")"));
                         if (picPath.startsWith("http") || picPath.startsWith("/")) {
                             return false;
@@ -343,7 +344,7 @@ var Api = (function () {
         //get comments_url
         // setCommentURL(issuesList, blogName);
     };
-    M.renderArticle = function (tid) {
+    M.renderArticle = function(tid) {
         var node = {
             blogUrl: gh.baseBlogUrl + gh.readmeTid,
             blogPath: "",
@@ -376,7 +377,7 @@ var Api = (function () {
      * @param isExpand 是否展开,默认合拢,传入true展开
      * @returns
      */
-    M.fuzzySearch = function (zTreeId, searchField, isHighLight, isExpand) {
+    M.fuzzySearch = function(zTreeId, searchField, isHighLight, isExpand) {
         var zTreeObj = $.fn.zTree.getZTreeObj(zTreeId); //获取树对象
         if (!zTreeObj) {
             alter("获取树对象失败");
@@ -410,7 +411,7 @@ var Api = (function () {
                     if (isHighLight) { //如果高亮，对文字进行高亮处理
                         //创建一个新变量newKeywords,不影响_keywords在下一个节点使用
                         //对_keywords中的元字符进行处理,否则无法在replace中使用RegExp
-                        var newKeywords = _keywords.replace(rexMeta, function (matchStr) {
+                        var newKeywords = _keywords.replace(rexMeta, function(matchStr) {
                             //对元字符做转义处理
                             return '\\' + matchStr;
                         });
@@ -418,7 +419,7 @@ var Api = (function () {
                         //为处理过元字符的_keywords创建正则表达式,全局且不分大小写
                         var rexGlobal = new RegExp(newKeywords, 'gi'); //'g'代表全局匹配,'i'代表不区分大小写
                         //无法直接使用replace(/substr/g,replacement)方法,所以使用RegExp
-                        node[nameKey] = node.oldname.replace(rexGlobal, function (originalText) {
+                        node[nameKey] = node.oldname.replace(rexGlobal, function(originalText) {
                             //将所有匹配的子串加上高亮效果
                             var highLightText =
                                 '<span style="color: whitesmoke;background-color: #3399ea;">' +
@@ -446,7 +447,7 @@ var Api = (function () {
         }
 
 
-        var showChildrenRecursive = function (zTreeObj, node) {
+        var showChildrenRecursive = function(zTreeObj, node) {
             for (var i = 0; i < node.children.length; i++) {
                 var child = node.children[i];
                 zTreeObj.showNode(child);
@@ -462,7 +463,7 @@ var Api = (function () {
             if (nodesShow && nodesShow.length > 0) {
                 //关键字不为空时对关键字节点的祖先节点进行二次处理
                 if (_keywords.length > 0) {
-                    $.each(nodesShow, function (n, obj) {
+                    $.each(nodesShow, function(n, obj) {
                         var pathOfOne = obj.getPath(); //向上追溯,获取节点的所有祖先节点(包括自己)
                         if (pathOfOne && pathOfOne.length > 0) { //对path中的每个节点进行操作
                             // i < pathOfOne.length-1, 对节点本身不再操作
@@ -486,7 +487,7 @@ var Api = (function () {
         }
 
         //监听关键字input输入框文字变化事件
-        $(searchField).on('input propertychange', function () {
+        $(searchField).on('input propertychange', function() {
             var _keywords = $(this).val().trim();
             searchNodeLazy(_keywords); //调用延时处理
         });
@@ -497,7 +498,7 @@ var Api = (function () {
             if (timeoutId) { //如果不为空,结束任务
                 clearTimeout(timeoutId);
             }
-            timeoutId = setTimeout(function () {
+            timeoutId = setTimeout(function() {
                 ztreeFilter(zTreeObj, _keywords); //延时执行筛选方法
                 $(searchField).focus(); //输入框重新获取焦点
             }, 500);
@@ -507,8 +508,8 @@ var Api = (function () {
 })();
 
 
-$(document).ready(function () {
-    var getRootPath = function () {
+$(document).ready(function() {
+    var getRootPath = function() {
         var curPath = window.document.location.href;
         var pathName = window.document.location.pathname;
         var pos = curPath.indexOf(pathName);
@@ -519,7 +520,7 @@ $(document).ready(function () {
     $.ajax({
         dataType: "json",
         url: getRootPath() + "/config.json",
-        success: function (result) {
+        success: function(result) {
             var username = result.username;
             for (var key in gh) {
                 var value = gh[key];
@@ -536,4 +537,3 @@ $(document).ready(function () {
         }
     });
 });
-
