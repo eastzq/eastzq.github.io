@@ -25,7 +25,7 @@ var Api = (function() {
         M.renderArticle(tid);
         M.bindEvent();
         $("#article").css("min-height", 450 + "px");
-        $(".markdwon-content").css("min-height", $(window).height() - 60);
+        $(".markdwon-content").css("min-height", $(window).height());
         if (location.hash) { M.anchorHandle(location.hash) }
     };
 
@@ -35,12 +35,12 @@ var Api = (function() {
         var temp = target.substring(1);
         var $t = $("a[name='" + temp + "']");
         if ($t.length === 0) return;
-        var targetOffset = $t.offset().top - 60;
+        var targetOffset = $t.offset().top - 80;
         $('html,body').animate({ scrollTop: targetOffset }, 200);
     }
 
     M.bindEvent = function() {
-        $('#md_toc_container').on('click', 'a', function() {
+        $('#md_toc_container a').on('click', function() {
             M.anchorHandle(this.hash)
         });
         $('#btnNav2').on('click', function(e) {
@@ -65,6 +65,7 @@ var Api = (function() {
             })
         }
         $(window).resize(function() {
+            $(".markdwon-content").css("min-height", $(window).height());
             var curWidth = $(window).width();
             if ((curWidth - 992) * (gh.winWidth - 992) <= 0) {
                 gh.winWidth = curWidth;
