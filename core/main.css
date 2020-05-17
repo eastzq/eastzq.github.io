@@ -180,7 +180,7 @@
 }
 
 #md_toc_container {
-    overflow: auto;
+    overflow-y: auto !important;
 }
 
 #md_toc_container ul li {
