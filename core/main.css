@@ -178,12 +178,14 @@
     line-height: 1.8;
     letter-spacing: 0.2px;
 }
-#md_toc_container{
+
+#md_toc_container {
     overflow: auto;
 }
+
 #md_toc_container ul li {
     list-style-type: none;
-    overflow: hidden;
+    overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
