@@ -35,12 +35,12 @@ var Api = (function() {
         var temp = target.substring(1);
         var $t = $("a[name='" + temp + "']");
         if ($t.length === 0) return;
-        var targetOffset = $t.offset().top - 80;
+        var targetOffset = $t.offset().top - 60;
         $('html,body').animate({ scrollTop: targetOffset }, 200);
     }
 
     M.bindEvent = function() {
-        $('#md_toc_container a').on('click', function() {
+        $('#md_toc_container').on('click', 'a', function() {
             M.anchorHandle(this.hash)
         });
         $('#btnNav2').on('click', function(e) {
@@ -57,11 +57,11 @@ var Api = (function() {
             $("#key-word").trigger("input");
         })
         if (gh.winWidth < 992) {
-            $(document).off("click").on("click", function() {
+            $(document).off("click").on("click", function(e) {
+                if ($(e.target).hasClass("md-toc-container") || $(e.target).hasClass("sidebar") || $(e.target).parents(".md-toc-container").length > 0 || $(e.target).parents(".sidebar").length > 0) {
+                    return;
+                }
                 $(".md-toc-container,.sidebar").hide(200);
-            })
-            $(".md-toc-container,.sidebar").off("click").on("click", function(e) {
-                e.stopPropagation();
             })
         }
         $(window).resize(function() {
@@ -71,11 +71,11 @@ var Api = (function() {
                 gh.winWidth = curWidth;
                 $(".md-toc-container,.sidebar").css("display", "");
                 if (gh.winWidth < 992) {
-                    $(document).off("click").on("click", function() {
+                    $(document).off("click").on("click", function(e) {
+                        if ($(e.target).hasClass("md-toc-container") || $(e.target).hasClass("sidebar") || $(e.target).parents(".md-toc-container").length > 0 || $(e.target).parents(".sidebar").length > 0) {
+                            return;
+                        }
                         $(".md-toc-container,.sidebar").hide(200);
-                    })
-                    $(".md-toc-container,.sidebar").off("click").on("click", function(e) {
-                        e.stopPropagation();
                     })
                 } else {
                     $(document).off("click");
