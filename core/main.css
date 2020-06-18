@@ -179,6 +179,10 @@
     letter-spacing: 0.2px;
 }
 
+#article.markdown-body ol,#article.markdown-body ul{
+    margin-left:2em;
+}
+
 #md_toc_container {
     overflow-y: auto !important;
 }
