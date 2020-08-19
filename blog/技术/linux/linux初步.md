@@ -135,3 +135,55 @@ wc命令用于统计指定文本的行数、字数、字节数，格式为“wc 
 ```
 wc -lwc grub2.cfg 
 ```
+### stat
+stat命令用于查看文件的具体存储信息和时间等信息，格式为“stat 文件名称”。
+```
+[root@linuxprobe ~]# stat anaconda-ks.cfg
+File: ‘anaconda-ks.cfg’
+Size: 1213 Blocks: 8 IO Block: 4096 regular file
+Device: fd00h/64768d Inode: 68912908 Links: 1
+Access: (0600/-rw-------) Uid: ( 0/ root) Gid: ( 0/ root)
+Context: system_u:object_r:admin_home_t:s0
+Access: 2017-07-14 01:46:18.721255659 -0400
+Modify: 2017-05-04 15:44:36.916027026 -0400
+Change: 2017-05-04 15:44:36.916027026 -0400
+Birth: -
+```
+
+### cut
+cut命令用于按“列”提取文本字符，格式为“cut [参数] 文本”。
+
+```shell
+# -d 代表分隔符，-f 代表显示分割后的第几列
+cut -d : -f 1 /etc/passwd
+```
+### diff
+
+diff命令用于比较多个文本文件的差异，格式为“diff [参数] 文件”。
+
+```shell
+diff --brief diff_A.txt diff_B.txt
+diff -c diff_A.txt diff_B.txt
+```
+
+## 文件目录管理命令
+### touch
+touch命令用于创建空白文件或设置文件的时间，格式为“touch [选项] [文件]”。
+可以修改 读取时间 修改时间 等
+```
+-d 同时修改atime与mtime
+-a 仅修改“读取时间”（atime）
+-m 仅修改“修改时间”（mtime）
+```
+### mkdir
+mkdir命令用于创建空白的目录，格式为“mkdir [选项] 目录”。
+
+递归创建文件夹
+```
+mkdir -p a/b/c/d/e
+```
+
+### cp
+cp命令用于复制文件或目录，格式为“cp [选项] 源文件 目标文件”。
+
+
