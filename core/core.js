@@ -21,7 +21,7 @@ var Api = (function() {
     M.init = function() {
         gh.winWidth = $(window).width();
         $("#header").text(gh.username + "'s blog");
-        $("#header").href("https://" + gh.username + ".github.io");
+        $("#header").attr("https://" + gh.username + ".github.io");
         M.genBlogTree2(gh.treeUrl);
         var tid = M.getUrlParams("tid");
         M.renderArticle(tid);
