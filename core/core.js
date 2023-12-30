@@ -236,6 +236,7 @@ var Api = (function() {
         var blogPath = node.blogPath;
         var blogName = node.fileName;
         var tid = node.tid;
+        $("#header").attr("https://" + gh.username + ".github.io");
         $("#title").text(blogName);
         $("title").text($("#title").text());
         $("#article").html("loading . . .");
@@ -309,7 +310,6 @@ var Api = (function() {
         // setCommentURL(issuesList, blogName);
     };
     M.renderArticle = function(tid) {
-        $("#header").attr("https://" + gh.username + ".github.io");
         var node = {
             blogUrl: gh.baseBlogUrl + gh.readmeTid,
             blogPath: "",
