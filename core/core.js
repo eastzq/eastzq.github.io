@@ -236,6 +236,7 @@ var Api = (function() {
         var blogPath = node.blogPath;
         var blogName = node.fileName;
         var tid = node.tid;
+        $("#title").text(blogName);
         $("title").text($("#title").text());
         $("#article").html("loading . . .");
 
