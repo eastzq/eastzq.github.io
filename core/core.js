@@ -21,10 +21,12 @@ var Api = (function() {
     M.init = function() {
         gh.winWidth = $(window).width();
         $("#header").text(gh.username + "'s blog");
+        $("#header").href("https://" + gh.username + ".github.io");
         M.genBlogTree2(gh.treeUrl);
         var tid = M.getUrlParams("tid");
         M.renderArticle(tid);
         M.bindEvent();
+        $("title").text($("#title").text());
         $("#article").css("min-height", 450 + "px");
         $(".markdwon-content").css("min-height", $(window).height());
         if (location.hash) { M.anchorHandle(location.hash) }
