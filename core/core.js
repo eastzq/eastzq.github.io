@@ -1,6 +1,7 @@
 /**
  * 全局参数
  */
+
 var gh = {
     username: "${username}", //pages用户名
     baseBlogUrl: "https://api.github.com/repos/${username}/${username}.github.io/contents/", //博客内容地址
@@ -124,46 +125,6 @@ var Api = (function() {
         //@deprecated
         //递归生成博客树 效率低，但是目前文件较少，以后可以改成懒加载。
         // github api有限制访问频率，所以递归容易产生太多请求，不合适。
-    M.genBlogTree = function(contentUrl) {
-        var blogTree = [];
-        $.ajax({
-            dataType: "json",
-            url: contentUrl,
-            async: false,
-            success: function(json) {
-                for (var i = 0; i < json.length; i++) {
-                    var node = {
-                        name: ""
-                    };
-                    var obj = json[i];
-                    console.log(obj);
-                    var fileName = obj.name;
-                    var fileType = obj.type;
-                    if (fileType === "file" && Api.isMarkdown(fileName)) {
-                        node.origin = obj;
-                        node.name = obj.name;
-                        node.type = fileType;
-                        node.blogPath =
-                            "/" +
-                            obj.path.substring(
-                                0,
-                                obj.path.lastIndexOf("/") + 1
-                            );
-                        node.blogUrl = gh.baseBlogUrl + path;
-                        blogTree.push(node);
-                    } else if (fileType === "dir") {
-                        node.origin = obj;
-                        node.name = obj.name;
-                        node.type = fileType;
-                        node.children = M.genBlogTree(obj.url);
-                        blogTree.push(node);
-                    }
-                }
-            }
-        });
-        return blogTree;
-    };
-
     //使用另外一个api来生成文件树。
     M.genBlogTree2 = function(treeUrl) {
         var blogTree = [];
@@ -332,10 +293,11 @@ var Api = (function() {
                     var md = result.replace(patten, function(match) {
                         var picPath = match.substring(1, match.lastIndexOf(")"));
                         if (picPath.startsWith("http") || picPath.startsWith("/")) {
-                            return false;
+                            return match;
+                        }else {
+                            var r = "(" + blogPath + picPath + ")";
+                            return r;
                         }
-                        var r = "(" + blogPath + picPath + ")";
-                        return r;
                     });
                     renderMd(md);
                     gh.cache[blogUrl] = md;
