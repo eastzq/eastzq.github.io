@@ -2516,7 +2516,7 @@
     overflow: auto;
 }
 
-.markdown-body code,
+.markdown-bolightsalmonrgb(33, 37, 41)ode,
 .markdown-body kbd,
 .markdown-body pre {
     font-family: "Meiryo UI", "YaHei Consolas Hybrid", Consolas, "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, monospace, monospace;
@@ -3273,7 +3273,7 @@
 
 @media screen {
     .str {
-        color: #080;
+        color: lightseagreen;
     }
     /* string content */
     .kwd {
@@ -3281,7 +3281,7 @@
     }
     /* a keyword */
     .com {
-        color: #800;
+        color: lightsalmon;
     }
     /* a comment */
     .typ {
@@ -3299,11 +3299,11 @@
         color: #660;
     }
     .tag {
-        color: #008;
+        color: lightgreen;
     }
     /* a markup tag name */
     .atn {
-        color: #606;
+        color: lightcoral;
     }
     /* a markup attribute name */
     .atv {
@@ -3334,7 +3334,7 @@ projection {
         font-weight: bold;
     }
     .com {
-        color: #600;
+        color: lightsalmon;
         font-style: italic;
     }
     .typ {
@@ -3350,11 +3350,11 @@ projection {
         color: #440;
     }
     .tag {
-        color: #006;
+        color: lightgreen;
         font-weight: bold;
     }
     .atn {
-        color: #404;
+        color: lightcoral;
     }
     .atv {
         color: #060;

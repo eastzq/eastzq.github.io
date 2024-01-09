@@ -27,7 +27,7 @@ website:    http://code.google.com/p/jquerytree/
 .ztree li span {line-height:21px; margin-right:2px}
 .ztree li span.button {line-height:0; margin:0; padding: 0; width:21px; height:21px; display: inline-block; vertical-align:middle;
   border:0 none; cursor: pointer;outline:none;
-  background-color:transparent; background-repeat:no-repeat; background-attachment: scroll;
+  background-color:rgb(33, 37, 41); background-repeat:no-repeat; background-attachment: scroll;
   background-image:url("./img/metro.png"); *background-image:url("./img/metro.gif")}
 
 .ztree li span.button.chk {width:13px; height:13px; margin:0 2px; cursor: auto}

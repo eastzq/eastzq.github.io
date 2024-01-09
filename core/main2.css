@@ -1,9 +1,9 @@
 .markdwon-content {
     padding-top: 55px;
-    background-color: #fff;
 }
 
 .md-toc-container {
+    background-color: rgb(33, 37, 41);
     padding: 20px 10px;
     display: none;
     border-left: 1px solid #eee;
