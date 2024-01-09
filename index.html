@@ -1,32 +1,22 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="tinyblog" content="v1.2">
-    <title>Meowrain's Blog</title>
-    <link rel="icon" href="https://github.githubassets.com/favicon.ico" type="image/x-icon" />
-
-    <!-- jquery -->
+    <title>Bootstrap demo</title>
     <script type="text/javascript" src="./lib/jquery-1.9.1.js"></script>
-    <!-- bootstrap -->
-    <link type="text/css" rel="stylesheet" href="./lib/bootstrap-3.3.5/css/bootstrap.min.css" />
-    <script type="text/javascript" src="./lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- font-awsome -->
-    <link type="text/css" href="./lib/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link type="text/css" href="./lib/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
     <!-- ztree -->
-    <link type="text/css" href="./lib/ztree/css/metroStyle/metroStyle.css" rel="stylesheet" />
-
-    <script type="text/javascript" src="./lib/ztree/js/jquery.ztree.core.min.js"></script>
-    <script type="text/javascript" src="./lib/ztree/js/jquery.ztree.exhide.js"></script>
-
-    <!-- gitalk -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-    <script src="./lib/md5.js"></script>
-
+    <link type="text/css" href="./lib/zTree_v3/css/metroStyle/metroStyle.css" rel="stylesheet" />
+    <script type="text/javascript" src="./lib/zTree_v3/js/jquery.ztree.core.min.js"></script>
+    <script type="text/javascript" src="./lib/zTree_v3/js/jquery.ztree.exhide.js"></script>
+    <script type="text/javascript" src="./core/core.js"></script>
     <!--markdown-->
     <link type="text/css" rel="stylesheet" href="./lib/editor.md/css/editormd.preview.css" />
     <script type="text/javascript" src="./lib/editor.md/lib/marked.min.js"></script>
@@ -38,54 +28,56 @@
     <script type="text/javascript" src="./lib/editor.md/lib/jquery.flowchart.min.js"></script>
     <script type="text/javascript" src="./lib/editor.md/editormd.js"></script>
 
+    <link type="text/css" href="./core/main2.css" rel="stylesheet">
 
-    <!-- myscript -->
-    <link type="text/css" href="./core/main.css" rel="stylesheet">
-    <script type="text/javascript" src="./core/core.js"></script>
 </head>
 
-<body class="index-body">
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid my-page-header">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="https://meowrain.github.io" id="header">note</a>
-                
-            </div>
-            <div class="btn-toggle-container">
-                <button type="button" class="btn btn-default" id="btnNav2">
+<body>
+    <nav class="navbar fixed-top navbar-expand navbar-dark bg-dark" role="navigation">
+        <a class="navbar-brand" id="header">Navbar</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-light" id="btnNav1">
                     <i class="fa fa-tree fa-lg"></i>
                 </button>
-                <button type="button" class="btn btn-default" id="btnNav1">
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-light" id="btnNav2">
                     <i class="fa fa-sort-amount-asc fa-lg"></i>
                 </button>
-            </div>
-                
-        </div>
+            </li>
+        </ul>
     </nav>
-
-    <div class="container-fluid main">
+    <div class="container-fluid ">
         <div class="row">
             <div class="sidebar">
                 <div class="input-group search-box">
-                    <input type="text" id="key-word" class="form-control"><span id="clearKeyword" class="input-group-addon btn btn-default">清空</span>
+                    <input type="text" id="key-word" class="form-control"><span id="clearKeyword"
+                        class="input-group-addon btn btn-default">清空</span>
                 </div>
                 <div id="blogTree" class="ztree"></div>
             </div>
-
-            <div class="col-sm-12 col-md-8 col-md-offset-2 markdwon-content">
-                <!--正文-->
-                <h1 class="page-title" id="title"></h1>
-                <div id="article"></div>
-
-                <div class="comments-container" id="comments">
-                </div>
-            </div>
-            <div class="md-toc-container" id="md_toc_container"></div>
         </div>
+
+        <div class="col-sm-12 col-md-8 offset-md-2 markdwon-content bg-dark">
+            <!--正文-->
+            <h1 class="page-title" id="title"></h1>
+            <div id="article" style="background-color: #212529;" ></div>
+
+            <div class="comments-container" id="comments">
+            </div>
+        </div>
+        <div class="md-toc-container" id="md_toc_container"></div>
     </div>
 
-</body>
 
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.min.js"></script>
+</body>
 
 </html>
