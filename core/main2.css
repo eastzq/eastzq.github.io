@@ -29,6 +29,7 @@
     /* Scrollable contents if viewport is shorter than content. */
     border-right: 1px solid black;
     width: 16.666666%;
+    background-color: rgb(33, 37, 41);
 }
 
 .sidebar .search-box {
