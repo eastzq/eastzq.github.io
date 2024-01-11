@@ -180,6 +180,31 @@ public class MyTime {
 </beans>
 ```
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+    ">
+    <util:properties id="prop">
+        <prop key="driver">com.mysql.cj.jdbc.Driver</prop>
+        <prop key="url">jdbc:mysql://localhost:3306/spring</prop>
+        <prop key="username">root</prop>
+        <prop key="password">123456</prop>
+
+    </util:properties>
+
+    <bean id="dataSource1" class="com.powercode.spring6.beans.MyDataSource1">
+        <property name="properties" ref="prop"/>
+    </bean>
+
+    <bean id="dataSource2" class="com.powercode.spring6.beans.MyDataSource2">
+        <property name="properties" ref="prop"/>
+    </bean>
+</beans>
+```
 
 ---
 
