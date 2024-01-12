@@ -13,7 +13,7 @@ var gh = {
   clientID: "bd98ae7094366c0c7473", //gitalk专用 用户自定义授权app参数
   clientSecret: "238af78bbd953bd880d286ea5deef43f84c91638", //gitalk专用 用户自定义授权app参数
   commentRepo: "blogComment", //评论所在仓库
-  isCommentOn: true, // 是否开启评论功能，需要配置[clientID][clientSecret][commentRepo]三项属性。也是gitalk专用属性，需要新建个github app，详见gitalk文档 https://github.com/gitalk/gitalk/blob/master/readme-cn.md
+  isCommentOn: false, // 是否开启评论功能，需要配置[clientID][clientSecret][commentRepo]三项属性。也是gitalk专用属性，需要新建个github app，详见gitalk文档 https://github.com/gitalk/gitalk/blob/master/readme-cn.md
 };
 /**
  * api接口
