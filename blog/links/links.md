@@ -17,3 +17,4 @@
 # test
 
 <a path="./pdf/韩顺平学java.pdf" class="pdfLink">pdf</a>
+<a path="./pdf/韩顺平学java.pdf" class="pdfLink">pdf</a>
