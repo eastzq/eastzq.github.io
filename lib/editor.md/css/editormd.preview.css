@@ -2516,7 +2516,7 @@
     overflow: auto;
 }
 
-.markdown-body code,
+.markdown-bolightsalmonrgb(33, 37, 41)ode,
 .markdown-body kbd,
 .markdown-body pre {
     font-family: "Meiryo UI", "YaHei Consolas Hybrid", Consolas, "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, monospace, monospace;
@@ -2556,6 +2556,8 @@
 .markdown-body * {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    background-color: #212529;
+    color: white;
 }
 
 .markdown-body input {
@@ -2911,7 +2913,7 @@
     padding-top: 0.2em;
     padding-bottom: 0.2em;
     margin: 0;
-    font-size: 85%;
+    font-size: 90%;
     background-color: rgba(0, 0, 0, 0.04);
     border-radius: 3px;
 }
@@ -2942,7 +2944,7 @@
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
-    background-color: #f7f7f7;
+    background-color: rgb(33, 37, 41);
     border-radius: 3px;
 }
 
@@ -2979,7 +2981,7 @@
     line-height: 10px;
     color: #555;
     vertical-align: middle;
-    background-color: #fcfcfc;
+    background-color: rgb(33, 37, 41);
     border: solid 1px #ccc;
     border-bottom-color: #bbb;
     border-radius: 3px;
@@ -3175,7 +3177,7 @@
 .editormd-preview-container code,
 .editormd-html-preview code {
     border: 1px solid #ddd;
-    background: #f6f6f6;
+    background: rgb(33, 37, 41);
     padding: 3px;
     border-radius: 3px;
     font-size: 14px;
@@ -3263,7 +3265,7 @@
 /* SPAN elements with the classes below are added by prettyprint. */
 
 .pln {
-    color: #000;
+    color: white;
 }
 
 
@@ -3271,19 +3273,19 @@
 
 @media screen {
     .str {
-        color: #080;
+        color: lightseagreen;
     }
     /* string content */
     .kwd {
-        color: #008;
+        color: lightblue;
     }
     /* a keyword */
     .com {
-        color: #800;
+        color: lightsalmon;
     }
     /* a comment */
     .typ {
-        color: #606;
+        color: lightblue;
     }
     /* a type name */
     .lit {
@@ -3297,11 +3299,11 @@
         color: #660;
     }
     .tag {
-        color: #008;
+        color: lightgreen;
     }
     /* a markup tag name */
     .atn {
-        color: #606;
+        color: lightcoral;
     }
     /* a markup attribute name */
     .atv {
@@ -3328,11 +3330,11 @@ projection {
         color: #060;
     }
     .kwd {
-        color: #006;
+        color: lightblue;
         font-weight: bold;
     }
     .com {
-        color: #600;
+        color: lightsalmon;
         font-style: italic;
     }
     .typ {
@@ -3348,11 +3350,11 @@ projection {
         color: #440;
     }
     .tag {
-        color: #006;
+        color: lightgreen;
         font-weight: bold;
     }
     .atn {
-        color: #404;
+        color: lightcoral;
     }
     .atv {
         color: #060;
@@ -3386,18 +3388,22 @@ li.L5,
 li.L6,
 li.L7,
 li.L8 {
+    background: rgb(33, 37, 41);
     list-style-type: none;
 }
 
 
 /* Alternate shading for lines */
 
+pre.prettyprint {
+    background-color: rgb(33, 37, 41);
+}
 li.L1,
 li.L3,
 li.L5,
 li.L7,
 li.L9 {
-    background: #eee;
+    background: rgb(33, 37, 41);
 }
 
 .editormd-preview-container pre.prettyprint,
@@ -3455,7 +3461,7 @@ li.L9 {
     z-index: 100;
     padding: 0 10px 10px;
     display: none;
-    background: #fff;
+    background: rgb(33, 37, 41);
     border: 1px solid #ddd;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -3503,7 +3509,7 @@ li.L9 {
 
 .editormd-preview-container .editormd-toc-menu>.markdown-toc>ul>li a:hover,
 .editormd-html-preview .editormd-toc-menu>.markdown-toc>ul>li a:hover {
-    background-color: #f6f6f6;
+    background-color: rgb(33, 37, 41);
 }
 
 .editormd-preview-container .editormd-toc-menu>.markdown-toc li,
@@ -3597,7 +3603,7 @@ li.L9 {
 
 .editormd-preview-container .editormd-toc-menu .toc-menu-btn:hover,
 .editormd-html-preview .editormd-toc-menu .toc-menu-btn:hover {
-    background-color: #f6f6f6;
+    background-color: rgb(33, 37, 41);
 }
 
 .editormd-preview-container .editormd-toc-menu .toc-menu-btn .fa,
