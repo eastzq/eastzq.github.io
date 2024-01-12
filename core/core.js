@@ -108,20 +108,6 @@ var Api = (function () {
         $("#key-word").focus();
       }
     });
-    $(document).ready(function () {
-      $(".pdfLink").on("click", function (event) {
-        event.preventDefault();
-        const pdfPath = $(this).attr("path");
-        if (pdfPath) {
-          const redirectUrl = `/pdfReader.html?path=${encodeURIComponent(
-            pdfPath
-          )}`;
-          window.location.href = redirectUrl;
-        } else {
-          console.error("未提供有效文件路径参数");
-        }
-      });
-    });
   };
   M.getUrlParams = function (variable) {
     var search = window.location.search;
@@ -288,6 +274,36 @@ var Api = (function () {
         tex: true, // 默认不解析
         flowChart: true, // 默认不解析
         sequenceDiagram: true, // 默认不解析
+      });
+      // pdfReader
+      $("#article").ready(function () {
+        $(".pdfLink").on("click", function (event) {
+          event.preventDefault();
+          const pdfPath = $(this).attr("path");
+          if (pdfPath) {
+            const redirectUrl = `/pdfReader.html?path=${encodeURIComponent(
+              pdfPath
+            )}`;
+            window.location.href = redirectUrl;
+          } else {
+            console.error("未提供有效文件路径参数");
+          }
+        });
+      });
+      // 存储初始URL
+      var currentUrl = window.location.href;
+
+      // 监听URL变化
+      $(window).on("popstate", function () {
+        // 获取新URL
+        var newUrl = window.location.href;
+
+        // 如果新URL与当前URL不同
+        if (currentUrl !== newUrl) {
+          console.log("update page");
+          // 刷新当前页面
+          window.location.reload();
+        }
       });
       renderBlogCommnet();
     };
