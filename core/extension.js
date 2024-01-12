@@ -13,3 +13,21 @@ window.addEventListener('popstate', function() {
     window.location.reload();
   }
 });
+
+document.addEventListener('DOMContentLoaded',function(){
+  const pdfLinks = document.querySelectorAll('.pdfLink');
+  pdfLinks.forEach(function(link){
+    link.addEventListener('click',function(event){
+      event.preventDefault();
+      const pdfPath = link.getAttribute('path');
+      if(pdfPath){
+        const host = window.location.host;
+        const redirectUrl = `${host}/pdfReader.html?path=${pdfPath}`;
+        window.location.href = redirectUrl;
+
+      }else {
+        console.log('未提供有效文件路径参数');
+      }
+    })
+  })
+})

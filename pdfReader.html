@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器在线pdf</title>
+    
+</head>
+<body>
+    <iframe id="pdf" src="" width="100%" height="800px"></iframe>
+    <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('path');
+    console.log(myParam);
+    document.querySelector('#pdf').src = "./pdf/韩顺平学java.pdf"
+    </script>
+</body>
+</html>
