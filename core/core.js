@@ -275,8 +275,34 @@ var Api = (function () {
         flowChart: true, // 默认不解析
         sequenceDiagram: true, // 默认不解析
       });
-      // pdfReader
+
       $("#article").ready(function () {
+        // comment reload
+        function initializeUtterances() {
+          var comment = document.getElementById("comments");
+          console.log(comment);
+          var utteranc_comment_container = document.querySelectorAll('.utterances');
+          utteranc_comment_container.forEach(function(container){
+            container.parentNode.removeChild(container);
+          })
+          var scriptElement = document.createElement("script");
+          scriptElement.type = "text/javascript";
+          scriptElement.src = "https://utteranc.es/client.js";
+          scriptElement.setAttribute("repo", "meowrain/meowrain.github.io");
+          scriptElement.setAttribute("issue-term", "title");
+          scriptElement.setAttribute("label", "欢迎小伙伴来评论！✨💬✨");
+          scriptElement.setAttribute("crossorigin", "anonymous");
+          scriptElement.setAttribute("theme", "github-dark");
+          scriptElement.async = true;
+          console.log(scriptElement);
+          
+          // 将 Utterances 评论组件添加到容器中
+          comment.appendChild(scriptElement);
+          console.log(comment);
+        }
+        initializeUtterances();
+
+        // pdfReader
         $(".pdfLink").on("click", function (event) {
           event.preventDefault();
           const pdfPath = $(this).attr("path");
@@ -290,22 +316,7 @@ var Api = (function () {
           }
         });
       });
-      // 存储初始URL
-      var currentUrl = window.location.href;
-
-      // 监听URL变化
-      $(window).on("popstate", function () {
-        // 获取新URL
-        var newUrl = window.location.href;
-
-        // 如果新URL与当前URL不同
-        if (currentUrl !== newUrl) {
-          console.log("update page");
-          // 刷新当前页面
-          window.location.reload();
-        }
-      });
-      renderBlogCommnet();
+      // renderBlogCommnet();
     };
     var renderBlogCommnet = function () {
       if (gh.isCommentOn == false) {
