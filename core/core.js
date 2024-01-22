@@ -280,7 +280,7 @@ var Api = (function () {
         // comment reload
         function initializeUtterances() {
           var comment = document.getElementById("comments");
-          console.log(comment);
+          // console.log(comment);
           var utteranc_comment_container = document.querySelectorAll('.utterances');
           utteranc_comment_container.forEach(function(container){
             container.parentNode.removeChild(container);
@@ -294,11 +294,10 @@ var Api = (function () {
           scriptElement.setAttribute("crossorigin", "anonymous");
           scriptElement.setAttribute("theme", "github-dark");
           scriptElement.async = true;
-          console.log(scriptElement);
-          
+          // console.log(scriptElement);
           // 将 Utterances 评论组件添加到容器中
           comment.appendChild(scriptElement);
-          console.log(comment);
+          // console.log(comment);
         }
         initializeUtterances();
 
