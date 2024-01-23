@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Meowrain's Blog</title>
-
+    <script src="./core/extension.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <link rel="icon" href="https://github.githubassets.com/favicon.ico" type="image/x-icon" />
@@ -29,12 +29,25 @@
     <script type="text/javascript" src="./lib/editor.md/lib/jquery.flowchart.min.js"></script>
 
     <script src="https://cdn.bootcdn.net/ajax/libs/editor-md/1.5.0/editormd.min.js"></script>
-
+    
     <link type="text/css" href="./core/main.css" rel="stylesheet">
 </head>
 
 <body>
-
+    <div class="overlay" >
+    <section class='loader'>
+        <div class='chars'>
+            <span class='char brace'>{</span>
+            <span class='dots'>
+                <span class='char dot-1'>.</span>
+                <span class='char dot-2'>.</span>
+                <span class='char dot-3'>.</span>
+            </span>
+            <span class='char brace'>}</span>
+        </div>
+        <h1>loading</h1>
+    </section>
+</div>
     <nav class="navbar fixed-top navbar-expand navbar-dark bg-dark" role="navigation">
         <a class="navbar-brand" id="header" href="https://meowrain.github.io">Navbar</a>
         <ul class="navbar-nav mr-auto">
@@ -77,7 +90,7 @@
     </div>
 
     <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.min.js"></script>
-    <script src="./core/extension.js"></script>
+    
 </body>
 
 </html>

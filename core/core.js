@@ -275,16 +275,17 @@ var Api = (function () {
         flowChart: true, // 默认不解析
         sequenceDiagram: true, // 默认不解析
       });
-
+      document.querySelector(".overlay").style.display = "inline";
       $("#article").ready(function () {
         // comment reload
         function initializeUtterances() {
           var comment = document.getElementById("comments");
           // console.log(comment);
-          var utteranc_comment_container = document.querySelectorAll('.utterances');
-          utteranc_comment_container.forEach(function(container){
+          var utteranc_comment_container =
+            document.querySelectorAll(".utterances");
+          utteranc_comment_container.forEach(function (container) {
             container.parentNode.removeChild(container);
-          })
+          });
           var scriptElement = document.createElement("script");
           scriptElement.type = "text/javascript";
           scriptElement.src = "https://utteranc.es/client.js";
@@ -314,31 +315,35 @@ var Api = (function () {
             console.error("未提供有效文件路径参数");
           }
         });
+
+        // 隐藏加载动画
+        document.querySelector(".overlay").style.display = "none";
       });
+
       // renderBlogCommnet();
     };
-    var renderBlogCommnet = function () {
-      if (gh.isCommentOn == false) {
-        return;
-      }
-      $("#comments").remove();
-      $(".markdwon-content").append(
-        '<div class="comments-container" id="comments"></div>'
-      );
-      var hash = md5(tid);
-      var gitalk = new Gitalk({
-        clientID: gh.clientID,
-        clientSecret: gh.clientSecret,
-        repo: gh.commentRepo,
-        owner: gh.username,
-        admin: [gh.username],
-        labels: [],
-        title: tid,
-        id: hash, // Ensure uniqueness and length less than 50
-        distractionFreeMode: false, // Facebook-like distraction free mode
-      });
-      gitalk.render("comments");
-    };
+    // var renderBlogCommnet = function () {
+    //   if (gh.isCommentOn == false) {
+    //     return;
+    //   }
+    //   $("#comments").remove();
+    //   $(".markdwon-content").append(
+    //     '<div class="comments-container" id="comments"></div>'
+    //   );
+    //   var hash = md5(tid);
+    //   var gitalk = new Gitalk({
+    //     clientID: gh.clientID,
+    //     clientSecret: gh.clientSecret,
+    //     repo: gh.commentRepo,
+    //     owner: gh.username,
+    //     admin: [gh.username],
+    //     labels: [],
+    //     title: tid,
+    //     id: hash, // Ensure uniqueness and length less than 50
+    //     distractionFreeMode: false, // Facebook-like distraction free mode
+    //   });
+    //   gitalk.render("comments");
+    // };
 
     if (gh.cache[blogUrl]) {
       renderMd(gh.cache[blogUrl]);
